@@ -1,7 +1,7 @@
 /*
  * [New BSD License] Copyright (c) 2011-2012, Brackit Project Team <info@brackit.org> All rights
  * reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification, are permitted
  * provided that the following conditions are met: * Redistributions of source code must retain the
  * above copyright notice, this list of conditions and the following disclaimer. * Redistributions
@@ -9,7 +9,7 @@
  * following disclaimer in the documentation and/or other materials provided with the distribution.
  * * Neither the name of the Brackit Project Team nor the names of its contributors may be used to
  * endorse or promote products derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
@@ -26,11 +26,11 @@ import org.sirix.exception.SirixException;
 import org.sirix.node.interfaces.SimpleDeweyID;
 
 /**
- * 
+ *
  * @author Michael Haustein
  * @author Christian Mathis
  * @author Sebastian Baechle
- * 
+ *
  */
 public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
 
@@ -570,27 +570,21 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
   private byte[] toBytes(int[] divisionValues) {
     // calculate needed bits for deweyID
     int numberOfDivisionBits = 0;
+    boolean wasInIf;
 
     // starting at second division, because the first "1" can be optimized
     for (int i = 1; i < divisionValues.length; i++) {
-      if (divisionValues[i] <= maxDivisionValue[0])
-        numberOfDivisionBits += completeDivisionLengthArray[0];
-      else if (divisionValues[i] <= maxDivisionValue[1])
-        numberOfDivisionBits += completeDivisionLengthArray[1];
-      else if (divisionValues[i] <= maxDivisionValue[2])
-        numberOfDivisionBits += completeDivisionLengthArray[2];
-      else if (divisionValues[i] <= maxDivisionValue[3])
-        numberOfDivisionBits += completeDivisionLengthArray[3];
-      else if (divisionValues[i] <= maxDivisionValue[4])
-        numberOfDivisionBits += completeDivisionLengthArray[4];
-      else if (divisionValues[i] <= maxDivisionValue[5])
-        numberOfDivisionBits += completeDivisionLengthArray[5];
-      else if (divisionValues[i] <= maxDivisionValue[6])
-        numberOfDivisionBits += completeDivisionLengthArray[6];
-      else if (divisionValues[i] <= maxDivisionValue[7])
-        numberOfDivisionBits += completeDivisionLengthArray[7];
-      else
+      wasInIf = false;
+      for (int j = 0; j < 8; j++) {
+        if (divisionValues[i] <= maxDivisionValue[j]) {
+          numberOfDivisionBits += completeDivisionLengthArray[j];
+          wasInIf = true;
+          break;
+        }
+      }
+      if (!wasInIf) {
         numberOfDivisionBits += completeDivisionLengthArray[8];
+      }
     }
 
     byte[] deweyIDbytes;
@@ -880,7 +874,7 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
    * Like {@link #getAncestor(int)} but it checks in addition whether the ancestor has the given
    * DeweyID as prefix (or whether the ancestor is itself a prefix of the given DeweyID). If the
    * prefix condition is not satisfied, null is returned.
-   * 
+   *
    * @param level
    * @param requiredPrefix
    * @return
@@ -1276,7 +1270,7 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
 
   /**
    * Checks whether this DeweyID is a prefix of the other.
-   * 
+   *
    * @param other the other DeweyID
    * @return true if this DeweyID is a prefix of the other DeweyID
    */
@@ -1298,7 +1292,7 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
   /**
    * Like {@link #compareTo(SirixDeweyID)} but without checking the collection ID. Only the
    * divisions are considered.
-   * 
+   *
    * @param deweyID the other DeweyID
    * @return -1 if this DeweyID is less than the other, 0 if they are equal, and 1 if this DeweyID
    *         is greater than the other
@@ -1326,7 +1320,7 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
 
   /**
    * Compares this DeweyID's parent with the given DeweyID (except for the collection ID).
-   * 
+   *
    * @param other the other DeweyID
    * @return a negative number if the parent is less than the other DeweyID, 0 if they are equal,
    *         and a positive number if the parent is greater than the other DeweyID
@@ -1350,7 +1344,7 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
 
   /**
    * Checks whether this DeweyID is either a prefix or greater than the other DeweyID.
-   * 
+   *
    * @param other the other DeweyID
    * @return true if this DeweyID is a prefix or greater than the other DeweyID
    */
@@ -1371,7 +1365,7 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
   /**
    * Checks whether this DeweyID appended by the extraDivision is either a prefix or greater than
    * the other DeweyID.
-   * 
+   *
    * @param other the other DeweyID
    * @return true if this DeweyID appended by the extraDivision is a prefix or greater than the
    *         other DeweyID
