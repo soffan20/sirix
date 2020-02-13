@@ -229,18 +229,23 @@ public final class TypedValue {
    * @return UTF-8-encoded byte array of string.
    */
   public static byte[] getBytes(final String mValue) {
+    //complexity is 1
     byte[] bytes = null;
     try {
       if (mValue == null || mValue.length() == 0) {
+        //complexity is 3
         bytes = EMPTY;
       } else {
         final StringBuilder builder = new StringBuilder();
         for (int i = 0; i < mValue.length(); i++) {
+          //complexity is 4
           switch (mValue.charAt(i)) {
             case '&':
+              //complexity is 5
               builder.append("&amp;");
               break;
             case '<':
+              //complexity is 6
               builder.append("&lt;");
               break;
             default:
@@ -253,6 +258,7 @@ public final class TypedValue {
         // .getBytes(IConstants.DEFAULT_ENCODING);
       }
     } catch (final Exception e) {
+      //complexity is 7
       throw new RuntimeException("Could not convert String to byte[]: " + e.getLocalizedMessage());
     }
     return bytes;
