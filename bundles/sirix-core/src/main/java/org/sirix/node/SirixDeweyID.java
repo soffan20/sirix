@@ -460,23 +460,10 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
   // calculates the number of bits, that are needed to store the choosen
   // division-value
   private int getDivisionBits(int division) {
-    if (divisionValues[division] <= maxDivisionValue[0])
-      return completeDivisionLengthArray[0];
-    else if (divisionValues[division] <= maxDivisionValue[1])
-      return completeDivisionLengthArray[1];
-    else if (divisionValues[division] <= maxDivisionValue[2])
-      return completeDivisionLengthArray[2];
-    else if (divisionValues[division] <= maxDivisionValue[3])
-      return completeDivisionLengthArray[3];
-    else if (divisionValues[division] <= maxDivisionValue[4])
-      return completeDivisionLengthArray[4];
-    else if (divisionValues[division] <= maxDivisionValue[5])
-      return completeDivisionLengthArray[5];
-    else if (divisionValues[division] <= maxDivisionValue[6])
-      return completeDivisionLengthArray[6];
-    else if (divisionValues[division] <= maxDivisionValue[7])
-      return completeDivisionLengthArray[7];
-    else
+    for (int i = 0; i < 8; i++) {
+      if (divisionValues[division] <= maxDivisionValue[i])
+        return completeDivisionLengthArray[i];
+    }
       return completeDivisionLengthArray[8];
   }
 
