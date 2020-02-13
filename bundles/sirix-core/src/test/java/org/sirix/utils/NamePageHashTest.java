@@ -27,7 +27,7 @@ import org.junit.Test;
 
 public class NamePageHashTest {
 
-  @Test
+  @Test 
   public void testGenerateHashCodes() {
     final int[] hashes = {70, 25};
     assertArrayEquals(hashes, NamePageHash.generateOffsets("foo".hashCode()));
