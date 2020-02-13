@@ -42,15 +42,79 @@ for each project, along with reason(s) why you changed to a different one.
     
     setDivisionBitArray: 29 
     
-    emitInsert:
-    
-    setDivisionBitArray:
    * Did all tools/methods get the same result?
    * Are the results clear?
 2. Are the functions just complex, or also long?
+
+    toBytes: 38 lines, so quite long.
+    
+    getDivisionBits: 19 lines, so not very long.
+    
+    compareUAsPrefix: About 20 lines, so not very long.
+    
+    compareAsPrefix: About 20 lines, so not very long.
+    
+    stringDecimal: 36 lines, so quite long as well.
+    
+    getType: 45 lines, so quite long as well.
+    
+    getBytes: 28 lines, so medium.
+    
+    setDivisionBitArray: 118 lines, so very long.
+    
 3. What is the purpose of the functions?
+
+    toBytes: Convert int array into byte array.
+    
+    getDivisionBits: Calculates the number of bits needed to store the chosen value.
+    
+    compareUAsPrefix: Compare 2 unsigned values to see which is the largest.
+    
+    compareAsPrefix: Compare 2 prefixes to see which is the largest.
+    
+    stringDecimal: Convert a String into other types depending on the value.
+    
+    getType: Return the most common type of 2 atomic operands form an XML schema.
+    
+    getBytes: Convert String into a byte array.
+    
+    setDivisionBitArray: Divide the bits of a byte array by a given divisor. 
+
 4. Are exceptions taken into account in the given measurements?
+
+    toBytes: No exceptions exist.
+    
+    getDivisionBits: No exceptions exist.
+    
+    compareUAsPrefix: No exceptions exist.
+    
+    compareAsPrefix: No exceptions exist.
+    
+    stringDecimal: Yes, there are two exceptions.
+    
+    getType: No exceptions exist.
+    
+    getBytes: Yes, one exception exists.
+    
+    setDivisionBitArray: No exceptions exist.
+    
 5. Is the documentation clear w.r.t. all the possible outcomes?
+
+    toBytes: No documentation at all.
+    
+    getDivisionBits: The exists some comments, but very high-level.
+    
+    compareUAsPrefix: No documentation at all.
+    
+    compareAsPrefix: No documentation at all.
+    
+    stringDecimal: No documentation at all.
+    
+    getType: There exists some documentation, but is not very detailed.
+    
+    getBytes: There exists some documentation, but is not very detailed.
+    
+    setDivisionBitArray: There exists some documentation, but is not very detailed.
 
 ## Coverage
 
