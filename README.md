@@ -1,20 +1,21 @@
 # Report for assignment 3
 
-This is a template for your report. You are free to modify it as needed.
-It is not required to use markdown for your report either, but the report
-has to be delivered in a standard, cross-platform format.
-
 ## Project
 
-Name:
+Name: SirixDB
 
-URL:
+URL: https://github.com/sirixdb/sirix
 
-One or two sentences describing it
+A database with revision control.
 
 ## Onboarding experience
 
 Did it build and run as documented?
+
+Yes, but it was a bit hard to know how to run the tests. Windows had some issues running
+the tests.
+
+Not documented. 
     
 See the assignment for details; if everything works out of the box,
 there is no need to write much here. If the first project(s) you picked
@@ -25,6 +26,25 @@ for each project, along with reason(s) why you changed to a different one.
 ## Complexity
 
 1. What are your results for ten complex functions?
+    toBytes: 12
+    
+    getDivisionBits: 9
+    
+    compareUAsPrefix: 8
+    
+    compareAsPrefix: 8
+    
+    stringDecimal: 18
+    
+    getType: 18
+    
+    getBytes: 8
+    
+    setDivisionBitArray: 29 
+    
+    emitInsert:
+    
+    setDivisionBitArray:
    * Did all tools/methods get the same result?
    * Are the results clear?
 2. Are the functions just complex, or also long?
@@ -35,6 +55,8 @@ for each project, along with reason(s) why you changed to a different one.
 ## Coverage
 
 ### Tools
+
+We used the built-in tool in IntelliJ. It was very easy to use.
 
 Document your experience in using a "new"/different coverage tool.
 
