@@ -461,22 +461,31 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
   // division-value
   private int getDivisionBits(int division) {
     if (divisionValues[division] <= maxDivisionValue[0])
+      // Cyclomatic complexity: 1
       return completeDivisionLengthArray[0];
     else if (divisionValues[division] <= maxDivisionValue[1])
+      // Cyclomatic complexity: 2
       return completeDivisionLengthArray[1];
     else if (divisionValues[division] <= maxDivisionValue[2])
+      // Cyclomatic complexity: 3
       return completeDivisionLengthArray[2];
     else if (divisionValues[division] <= maxDivisionValue[3])
+      // Cyclomatic complexity: 4
       return completeDivisionLengthArray[3];
     else if (divisionValues[division] <= maxDivisionValue[4])
+      // Cyclomatic complexity: 5
       return completeDivisionLengthArray[4];
     else if (divisionValues[division] <= maxDivisionValue[5])
+      // Cyclomatic complexity: 6
       return completeDivisionLengthArray[5];
     else if (divisionValues[division] <= maxDivisionValue[6])
+      // Cyclomatic complexity: 7
       return completeDivisionLengthArray[6];
     else if (divisionValues[division] <= maxDivisionValue[7])
+      // Cyclomatic complexity: 8
       return completeDivisionLengthArray[7];
     else
+      // Cyclomatic complexity: 9
       return completeDivisionLengthArray[8];
   }
 
