@@ -21,15 +21,17 @@
 
 package org.sirix.service.xml.xpath.comparators;
 
-import static org.sirix.service.xml.xpath.XPathAxis.XPATH_10_COMP;
-import java.util.ArrayList;
-import java.util.List;
 import org.sirix.api.Axis;
 import org.sirix.api.xml.XmlNodeReadOnlyTrx;
 import org.sirix.exception.SirixXPathException;
 import org.sirix.service.xml.xpath.AtomicValue;
 import org.sirix.service.xml.xpath.functions.Function;
 import org.sirix.service.xml.xpath.types.Type;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.sirix.service.xml.xpath.XPathAxis.XPATH_10_COMP;
 
 /**
  * <h1>GeneralComp</h1>
@@ -43,13 +45,13 @@ public class GeneralComp extends AbstractComparator {
   /**
    * Constructor. Initializes the internal state.
    *
-   * @param rtx Exclusive (immutable) trx to iterate with.
+   * @param rtx       Exclusive (immutable) trx to iterate with.
    * @param mOperand1 First value of the comparison
    * @param mOperand2 Second value of the comparison
-   * @param mCom comparison kind
+   * @param mCom      comparison kind
    */
   public GeneralComp(final XmlNodeReadOnlyTrx rtx, final Axis mOperand1, final Axis mOperand2,
-      final CompKind mCom) {
+                     final CompKind mCom) {
 
     super(rtx, mOperand1, mOperand2, mCom);
   }
@@ -59,7 +61,7 @@ public class GeneralComp extends AbstractComparator {
    */
   @Override
   protected boolean compare(final AtomicValue[] mOperand1, final AtomicValue[] mOperand2)
-      throws SirixXPathException {
+          throws SirixXPathException {
 
     assert mOperand1.length >= 1 && mOperand2.length >= 1;
 
@@ -87,7 +89,7 @@ public class GeneralComp extends AbstractComparator {
     AtomicValue atomized;
     // cast to double, if compatible with XPath 1.0 and <, >, >=, <=
     final boolean convert =
-        !(!XPATH_10_COMP || getCompKind() == CompKind.EQ || getCompKind() == CompKind.EQ);
+            !(!XPATH_10_COMP || getCompKind() == CompKind.EQ || getCompKind() == CompKind.EQ);
 
     boolean first = true;
     do {
@@ -106,6 +108,32 @@ public class GeneralComp extends AbstractComparator {
     return op.toArray(new AtomicValue[op.size()]);
   }
 
+
+  protected Type notxPath10Compatible(Type mType1, Type mType2) {
+    if (mType1 == Type.UNTYPED_ATOMIC) {
+      switch (mType2) {
+        case STRING:
+          return Type.STRING;
+        case DOUBLE:
+          return Type.DOUBLE;
+        default:
+          return mType2;
+      }
+    } else if (mType2 == Type.UNTYPED_ATOMIC) {
+      switch (mType1) {
+        case STRING:
+          return Type.STRING;
+        case DOUBLE:
+          return Type.DOUBLE;
+        default:
+          return mType1;
+      }
+    } else {
+      return Type.getLeastCommonType(mType1, mType2);
+    }
+  }
+
+
   /**
    * {@inheritDoc}
    */
@@ -121,7 +149,7 @@ public class GeneralComp extends AbstractComparator {
       }
 
       if (mType1 == Type.STRING || mType2 == Type.STRING
-          || (mType1 == Type.UNTYPED_ATOMIC && mType2 == Type.UNTYPED_ATOMIC)) {
+              || (mType1 == Type.UNTYPED_ATOMIC && mType2 == Type.UNTYPED_ATOMIC)) {
         return Type.STRING;
       }
 
@@ -130,43 +158,8 @@ public class GeneralComp extends AbstractComparator {
 
       }
 
-    } else {
-      if (mType1 == Type.UNTYPED_ATOMIC) {
-        switch (mType2) {
-          case UNTYPED_ATOMIC:
-          case STRING:
-            return Type.STRING;
-          case INTEGER:
-          case DECIMAL:
-          case FLOAT:
-          case DOUBLE:
-            return Type.DOUBLE;
-
-          default:
-            return mType2;
-        }
-      }
-
-      if (mType2 == Type.UNTYPED_ATOMIC) {
-        switch (mType1) {
-          case UNTYPED_ATOMIC:
-          case STRING:
-            return Type.STRING;
-          case INTEGER:
-          case DECIMAL:
-          case FLOAT:
-          case DOUBLE:
-            return Type.DOUBLE;
-
-          default:
-            return mType1;
-        }
-      }
-
     }
-
-    return Type.getLeastCommonType(mType1, mType2);
-
+    return notxPath10Compatible(mType1, mType2);
   }
 
   // protected void hook(final AtomicValue[] operand1, final AtomicValue[]
