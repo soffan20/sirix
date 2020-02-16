@@ -24,6 +24,7 @@ package org.sirix.node;
 import java.util.Arrays;
 import org.sirix.exception.SirixException;
 import org.sirix.node.interfaces.SimpleDeweyID;
+import org.sirix.utils.Coverage;
 
 /**
  * 
@@ -35,6 +36,8 @@ import org.sirix.node.interfaces.SimpleDeweyID;
 public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
 
   private final static String divisionSeparator = ".";
+
+  public static Coverage coverage = new Coverage();
 
   private final static int rootNodeDivisionValue = 1;
   private final static String rootNodeDivisionValueStr = Integer.toString(rootNodeDivisionValue);
@@ -460,7 +463,11 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
   // calculates the number of bits, that are needed to store the choosen
   // division-value
   private int getDivisionBits(int division) {
+    var fun = coverage.inFunction("SirixDeweyID.getDivisionBits", 19);
+    fun.inBranch(0,1);
     if (divisionValues[division] <= maxDivisionValue[0])
+      // Cyclomatic complexity: 1
+      fun.
       return completeDivisionLengthArray[0];
     else if (divisionValues[division] <= maxDivisionValue[1])
       return completeDivisionLengthArray[1];
