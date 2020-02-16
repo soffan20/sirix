@@ -1,7 +1,7 @@
 /*
  * [New BSD License] Copyright (c) 2011-2012, Brackit Project Team <info@brackit.org> All rights
  * reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification, are permitted
  * provided that the following conditions are met: * Redistributions of source code must retain the
  * above copyright notice, this list of conditions and the following disclaimer. * Redistributions
@@ -9,7 +9,7 @@
  * following disclaimer in the documentation and/or other materials provided with the distribution.
  * * Neither the name of the Brackit Project Team nor the names of its contributors may be used to
  * endorse or promote products derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
@@ -27,11 +27,11 @@ import org.sirix.node.interfaces.SimpleDeweyID;
 import org.sirix.utils.Coverage;
 
 /**
- * 
+ *
  * @author Michael Haustein
  * @author Christian Mathis
  * @author Sebastian Baechle
- * 
+ *
  */
 public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
 
@@ -463,28 +463,35 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
   // calculates the number of bits, that are needed to store the choosen
   // division-value
   private int getDivisionBits(int division) {
-    var fun = coverage.inFunction("SirixDeweyID.getDivisionBits", 19);
-    fun.inBranch(0,1);
-    if (divisionValues[division] <= maxDivisionValue[0])
-      // Cyclomatic complexity: 1
-      fun.
-      return completeDivisionLengthArray[0];
-    else if (divisionValues[division] <= maxDivisionValue[1])
-      return completeDivisionLengthArray[1];
-    else if (divisionValues[division] <= maxDivisionValue[2])
-      return completeDivisionLengthArray[2];
-    else if (divisionValues[division] <= maxDivisionValue[3])
-      return completeDivisionLengthArray[3];
-    else if (divisionValues[division] <= maxDivisionValue[4])
-      return completeDivisionLengthArray[4];
-    else if (divisionValues[division] <= maxDivisionValue[5])
-      return completeDivisionLengthArray[5];
-    else if (divisionValues[division] <= maxDivisionValue[6])
-      return completeDivisionLengthArray[6];
-    else if (divisionValues[division] <= maxDivisionValue[7])
-      return completeDivisionLengthArray[7];
-    else
-      return completeDivisionLengthArray[8];
+    var funGetDivisionBits = coverage.inFunction("SirixDeweyID.getDivisionBits", 19);
+    funGetDivisionBits.inBranch(0,1);
+    if (divisionValues[division] <= maxDivisionValue[0]){
+      funGetDivisionBits.inBranch(1,2);
+      return completeDivisionLengthArray[0];}
+    else if (divisionValues[division] <= maxDivisionValue[1]){
+      funGetDivisionBits.inBranch(2,2);
+      return completeDivisionLengthArray[1];}
+    else if (divisionValues[division] <= maxDivisionValue[2]){
+      funGetDivisionBits.inBranch(3,2);
+      return completeDivisionLengthArray[2];}
+    else if (divisionValues[division] <= maxDivisionValue[3]){
+      funGetDivisionBits.inBranch(4,2);
+      return completeDivisionLengthArray[3];}
+    else if (divisionValues[division] <= maxDivisionValue[4]){
+      funGetDivisionBits.inBranch(5,2);
+      return completeDivisionLengthArray[4];}
+    else if (divisionValues[division] <= maxDivisionValue[5]){
+      funGetDivisionBits.inBranch(6,2);
+      return completeDivisionLengthArray[5];}
+    else if (divisionValues[division] <= maxDivisionValue[6]){
+      funGetDivisionBits.inBranch(7,2);
+      return completeDivisionLengthArray[6];}
+    else if (divisionValues[division] <= maxDivisionValue[7]){
+      funGetDivisionBits.inBranch(8,2);
+      return completeDivisionLengthArray[7];}
+    else{
+      funGetDivisionBits.inBranch(9,2);
+      return completeDivisionLengthArray[8];}
   }
 
   // sets the bits in the byteArray for the given division, which has to write
@@ -623,31 +630,43 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
   private byte[] toBytes(int[] divisionValues) {
     // calculate needed bits for deweyID
     int numberOfDivisionBits = 0;
+    var funToBytes = coverage.inFunction("SirixDeweyID.toBytes", 30);
+    funToBytes.inBranch(0,1);
 
     // starting at second division, because the first "1" can be optimized
     for (int i = 1; i < divisionValues.length; i++) {
-      if (divisionValues[i] <= maxDivisionValue[0])
-        numberOfDivisionBits += completeDivisionLengthArray[0];
-      else if (divisionValues[i] <= maxDivisionValue[1])
-        numberOfDivisionBits += completeDivisionLengthArray[1];
-      else if (divisionValues[i] <= maxDivisionValue[2])
-        numberOfDivisionBits += completeDivisionLengthArray[2];
-      else if (divisionValues[i] <= maxDivisionValue[3])
-        numberOfDivisionBits += completeDivisionLengthArray[3];
-      else if (divisionValues[i] <= maxDivisionValue[4])
-        numberOfDivisionBits += completeDivisionLengthArray[4];
-      else if (divisionValues[i] <= maxDivisionValue[5])
-        numberOfDivisionBits += completeDivisionLengthArray[5];
-      else if (divisionValues[i] <= maxDivisionValue[6])
-        numberOfDivisionBits += completeDivisionLengthArray[6];
-      else if (divisionValues[i] <= maxDivisionValue[7])
-        numberOfDivisionBits += completeDivisionLengthArray[7];
-      else
-        numberOfDivisionBits += completeDivisionLengthArray[8];
+      funToBytes.inBranch(1,2);
+      if (divisionValues[i] <= maxDivisionValue[0]){
+        funToBytes.inBranch(2,3);
+        numberOfDivisionBits += completeDivisionLengthArray[0];}
+      else if (divisionValues[i] <= maxDivisionValue[1]){
+        funToBytes.inBranch(3,3);
+        numberOfDivisionBits += completeDivisionLengthArray[1];}
+      else if (divisionValues[i] <= maxDivisionValue[2]){
+        funToBytes.inBranch(4,3);
+        numberOfDivisionBits += completeDivisionLengthArray[2];}
+      else if (divisionValues[i] <= maxDivisionValue[3]){
+        funToBytes.inBranch(5,3);
+        numberOfDivisionBits += completeDivisionLengthArray[3];}
+      else if (divisionValues[i] <= maxDivisionValue[4]){
+        funToBytes.inBranch(6,3);
+        numberOfDivisionBits += completeDivisionLengthArray[4];}
+      else if (divisionValues[i] <= maxDivisionValue[5]){
+        funToBytes.inBranch(7,3);
+        numberOfDivisionBits += completeDivisionLengthArray[5];}
+      else if (divisionValues[i] <= maxDivisionValue[6]){
+        funToBytes.inBranch(8,3);
+        numberOfDivisionBits += completeDivisionLengthArray[6];}
+      else if (divisionValues[i] <= maxDivisionValue[7]){
+        funToBytes.inBranch(9,3);
+        numberOfDivisionBits += completeDivisionLengthArray[7];}
+      else{
+        numberOfDivisionBits += completeDivisionLengthArray[8];}
     }
 
     byte[] deweyIDbytes;
     if (numberOfDivisionBits % 8 == 0) {
+      funToBytes.inBranch(10,2);
       deweyIDbytes = new byte[(numberOfDivisionBits / 8)];
     } else {
       deweyIDbytes = new byte[(numberOfDivisionBits / 8) + 1];
@@ -655,9 +674,11 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
 
     int bitIndex = 0;
     for (int i = 1; i < this.divisionValues.length; i++) {
+      funToBytes.inBranch(11,2);
       bitIndex = setDivisionBitArray(divisionValues, deweyIDbytes, i, bitIndex);
     }
 
+    funToBytes.inBranch(12,1);
     return deweyIDbytes;
   }
 
@@ -933,7 +954,7 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
    * Like {@link #getAncestor(int)} but it checks in addition whether the ancestor has the given
    * DeweyID as prefix (or whether the ancestor is itself a prefix of the given DeweyID). If the
    * prefix condition is not satisfied, null is returned.
-   * 
+   *
    * @param level
    * @param requiredPrefix
    * @return
@@ -1329,7 +1350,7 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
 
   /**
    * Checks whether this DeweyID is a prefix of the other.
-   * 
+   *
    * @param other the other DeweyID
    * @return true if this DeweyID is a prefix of the other DeweyID
    */
@@ -1351,7 +1372,7 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
   /**
    * Like {@link #compareTo(SirixDeweyID)} but without checking the collection ID. Only the
    * divisions are considered.
-   * 
+   *
    * @param deweyID the other DeweyID
    * @return -1 if this DeweyID is less than the other, 0 if they are equal, and 1 if this DeweyID
    *         is greater than the other
@@ -1379,7 +1400,7 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
 
   /**
    * Compares this DeweyID's parent with the given DeweyID (except for the collection ID).
-   * 
+   *
    * @param other the other DeweyID
    * @return a negative number if the parent is less than the other DeweyID, 0 if they are equal,
    *         and a positive number if the parent is greater than the other DeweyID
@@ -1403,7 +1424,7 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
 
   /**
    * Checks whether this DeweyID is either a prefix or greater than the other DeweyID.
-   * 
+   *
    * @param other the other DeweyID
    * @return true if this DeweyID is a prefix or greater than the other DeweyID
    */
@@ -1424,7 +1445,7 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
   /**
    * Checks whether this DeweyID appended by the extraDivision is either a prefix or greater than
    * the other DeweyID.
-   * 
+   *
    * @param other the other DeweyID
    * @return true if this DeweyID appended by the extraDivision is a prefix or greater than the
    *         other DeweyID
