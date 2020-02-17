@@ -463,8 +463,8 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
   // calculates the number of bits, that are needed to store the choosen
   // division-value
   private int getDivisionBits(int division) {
-    var funGetDivisionBits = coverage.inFunction("SirixDeweyID.getDivisionBits", 19);
-    funGetDivisionBits.inBranch(0,1);
+    var funGetDivisionBits = coverage.inFunction("SirixDeweyID.getDivisionBits", 18);
+    funGetDivisionBits.inBranch(0,2);
     if (divisionValues[division] <= maxDivisionValue[0]){
       funGetDivisionBits.inBranch(1,2);
       return completeDivisionLengthArray[0];}
@@ -490,7 +490,6 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
       funGetDivisionBits.inBranch(8,2);
       return completeDivisionLengthArray[7];}
     else{
-      funGetDivisionBits.inBranch(9,2);
       return completeDivisionLengthArray[8];}
   }
 
@@ -631,34 +630,34 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
     // calculate needed bits for deweyID
     int numberOfDivisionBits = 0;
     var funToBytes = coverage.inFunction("SirixDeweyID.toBytes", 30);
-    funToBytes.inBranch(0,1);
+    funToBytes.inBranch(0,7);
 
     // starting at second division, because the first "1" can be optimized
     for (int i = 1; i < divisionValues.length; i++) {
-      funToBytes.inBranch(1,2);
+      funToBytes.inBranch(1,3);
       if (divisionValues[i] <= maxDivisionValue[0]){
-        funToBytes.inBranch(2,3);
+        funToBytes.inBranch(2,2);
         numberOfDivisionBits += completeDivisionLengthArray[0];}
       else if (divisionValues[i] <= maxDivisionValue[1]){
-        funToBytes.inBranch(3,3);
+        funToBytes.inBranch(3,2);
         numberOfDivisionBits += completeDivisionLengthArray[1];}
       else if (divisionValues[i] <= maxDivisionValue[2]){
-        funToBytes.inBranch(4,3);
+        funToBytes.inBranch(4,2);
         numberOfDivisionBits += completeDivisionLengthArray[2];}
       else if (divisionValues[i] <= maxDivisionValue[3]){
-        funToBytes.inBranch(5,3);
+        funToBytes.inBranch(5,2);
         numberOfDivisionBits += completeDivisionLengthArray[3];}
       else if (divisionValues[i] <= maxDivisionValue[4]){
-        funToBytes.inBranch(6,3);
+        funToBytes.inBranch(6,2);
         numberOfDivisionBits += completeDivisionLengthArray[4];}
       else if (divisionValues[i] <= maxDivisionValue[5]){
-        funToBytes.inBranch(7,3);
+        funToBytes.inBranch(7,2);
         numberOfDivisionBits += completeDivisionLengthArray[5];}
       else if (divisionValues[i] <= maxDivisionValue[6]){
-        funToBytes.inBranch(8,3);
+        funToBytes.inBranch(8,2);
         numberOfDivisionBits += completeDivisionLengthArray[6];}
       else if (divisionValues[i] <= maxDivisionValue[7]){
-        funToBytes.inBranch(9,3);
+        funToBytes.inBranch(9,2);
         numberOfDivisionBits += completeDivisionLengthArray[7];}
       else{
         numberOfDivisionBits += completeDivisionLengthArray[8];}
@@ -678,7 +677,6 @@ public class SirixDeweyID implements Comparable<SirixDeweyID>, SimpleDeweyID {
       bitIndex = setDivisionBitArray(divisionValues, deweyIDbytes, i, bitIndex);
     }
 
-    funToBytes.inBranch(12,1);
     return deweyIDbytes;
   }
 
