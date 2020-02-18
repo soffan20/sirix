@@ -97,6 +97,7 @@ CHANGE LINK TO BEFORE
     escape: The function escapes control characters and specific unicode characters in a string.
 
     deserialize: Deserialize JSON strings into a node type for the internal Abstract Syntax Tree
+
 4. Are exceptions taken into account in the given measurements?
 
     toBytes: No exceptions exist.
@@ -117,7 +118,7 @@ CHANGE LINK TO BEFORE
 
     escape: No exceptions exist.
 
-   deserialize: AssertionError is thrown when the assumed type of the string to be parsed is not one of the specified number formats.
+    deserialize: AssertionError is thrown when the assumed type of the string to be parsed is not one of the specified number formats.
 
 5. Is the documentation clear w.r.t. all the possible outcomes?
 
@@ -165,7 +166,7 @@ We used the built-in tool in IntelliJ. It was very easy to use.
 
  [SirixDeweyID.setDivisionBitArray](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L501-L651)
 
- [StringValue.escape](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52)
+ [StringValue.escape](https://github.com/soffan20/sirix/blob/af439874b3359f4e50724f4467e3a1b21b94ace4/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L8-L68)
 
  [Nodekind.deserialize](https://github.com/soffan20/sirix/blob/513d23f929e28b3d333ce784e55f248700af452e/bundles/sirix-core/src/main/java/org/sirix/node/NodeKind.java#L1062-L1091)
 
@@ -199,13 +200,17 @@ time limit.
 
 Show the comments that describe the requirements for the coverage.
 
-Report of old coverage: [link]
+Table of old coverage:
 
-Report of new coverage: [link]
+* StringValue.escape: 86%
+
+Table of new coverage:
+
+* StringValue.escape: 100%
 
 Test cases added:
 
-git diff ...
+* [StringValue.escape](https://github.com/soffan20/sirix/blob/734bea335d246aa44507ff88e3409b2a53eb3bf6/bundles/sirix-core/src/test/java/org/sirix/service/json/serializer/StringValueTest.java)
 
 ## Refactoring
 
