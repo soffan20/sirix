@@ -33,6 +33,8 @@ import org.sirix.settings.Constants;
  */
 public final class TypedValue {
 
+  public static Coverage cov = new Coverage();
+
   /** Empty string. */
   public static final byte[] EMPTY = new byte[0];
 
@@ -229,21 +231,28 @@ public final class TypedValue {
    * @return UTF-8-encoded byte array of string.
    */
   public static byte[] getBytes(final String mValue) {
+    var fun = cov.inFunction("TypedValue.getBytes",16);
+    fun.inBranch(0,2);
     byte[] bytes = null;
     try {
       if (mValue == null || mValue.length() == 0) {
+        fun.inBranch(1,2);
         bytes = EMPTY;
       } else {
         final StringBuilder builder = new StringBuilder();
         for (int i = 0; i < mValue.length(); i++) {
+          fun.inBranch(2,4);
           switch (mValue.charAt(i)) {
             case '&':
+              fun.inBranch(3,3);
               builder.append("&amp;");
               break;
             case '<':
+              fun.inBranch(4,2);
               builder.append("&lt;");
               break;
             default:
+              fun.inBranch(4,1);
               builder.append(mValue.charAt(i));
           }
         }
@@ -253,6 +262,7 @@ public final class TypedValue {
         // .getBytes(IConstants.DEFAULT_ENCODING);
       }
     } catch (final Exception e) {
+      fun.inBranch(6,2);
       throw new RuntimeException("Could not convert String to byte[]: " + e.getLocalizedMessage());
     }
     return bytes;
