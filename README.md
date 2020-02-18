@@ -34,7 +34,7 @@ for each project, along with reason(s) why you changed to a different one.
     
     compareAsPrefix: 8
     
-    stringDecimal: 18
+    stringToNumber: 18
     
     getType: 18
     
@@ -46,21 +46,21 @@ for each project, along with reason(s) why you changed to a different one.
    * Are the results clear?
 2. Are the functions just complex, or also long?
 
-    toBytes: 38 lines, so quite long.
+    toBytes: 30 lines, so quite long.
     
-    getDivisionBits: 19 lines, so not very long.
+    getDivisionBits: 18 lines, so not very long.
     
     compareUAsPrefix: About 20 lines, so not very long.
     
     compareAsPrefix: About 20 lines, so not very long.
     
-    stringDecimal: 36 lines, so quite long as well.
+    stringToNumber: 24 lines, so not very long.
     
-    getType: 45 lines, so quite long as well.
+    getType: 4 lines, so not long.
     
-    getBytes: 28 lines, so medium.
+    getBytes: 16 lines, so medium.
     
-    setDivisionBitArray: 118 lines, so very long.
+    setDivisionBitArray: 79 lines, so very long.
     
 3. What is the purpose of the functions?
 
@@ -72,7 +72,7 @@ for each project, along with reason(s) why you changed to a different one.
     
     compareAsPrefix: Compare 2 prefixes to see which is the largest.
     
-    stringDecimal: Convert a String into other types depending on the value.
+    stringToNumber: Convert a String into other types depending on the value.
     
     getType: Return the most common type of 2 atomic operands form an XML schema.
     
@@ -90,7 +90,7 @@ for each project, along with reason(s) why you changed to a different one.
     
     compareAsPrefix: No exceptions exist.
     
-    stringDecimal: Yes, there are two exceptions.
+    stringToNumber: Yes, there are two exceptions.
     
     getType: No exceptions exist.
     
@@ -108,7 +108,7 @@ for each project, along with reason(s) why you changed to a different one.
     
     compareAsPrefix: No documentation at all.
     
-    stringDecimal: No documentation at all.
+    stringToNumber: No documentation at all.
     
     getType: There exists some documentation, but is not very detailed.
     
