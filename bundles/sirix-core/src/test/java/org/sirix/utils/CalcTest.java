@@ -45,4 +45,33 @@ public class CalcTest {
         byte[] value2 = new byte[]{1, 1, 1, 1, 1, 1, 1, 2};
         assertEquals("The second value value should be 1 larger than the first", -1, Calc.compareLong(value1, value2));
     }
+
+    @Test
+    public void compareDouble() {
+        byte[] value1 = new byte[]{1, 1, 1, 1, 1, 1, 1, 1};
+        byte[] value2 = new byte[]{1, 1, 1, 1, 1, 1, 1, 2};
+        assertEquals("The second value should be 1 larger than the first", -1, Calc.compareDouble(value1, value2));
+    }
+
+    @Test
+    public void compareFloat() {
+        byte[] value1 = new byte[]{1, 1, 1, 1};
+        byte[] value2 = new byte[]{1, 1, 1, 2};
+        assertEquals("The second value should be 1 larger than the first", -1, Calc.compareFloat(value1, value2));
+    }
+
+    @Test
+    public void compareBigInteger() {
+        byte[] value1 = new byte[]{1, 1, 1, 1};
+        byte[] value2 = new byte[]{1, 1, 1, 2};
+        assertEquals("The second value should be 1 larger than the first", -1, Calc.compareBigInteger(value1, value2));
+    }
+
+    @Test
+    public void compareBigDecimal() {
+        byte[] value1 = new byte[]{1, 1, 1, 1};
+        byte[] value2 = new byte[]{1, 1, 1, 2};
+        assertEquals("The second value should be 1 larger than the first", -1, Calc.compareBigDecimal(value1, value2));
+    }
+
 }
