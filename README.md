@@ -201,14 +201,18 @@ time limit.
 Show the comments that describe the requirements for the coverage.
 
 Table of old coverage:
+* Calc                1 %
 
 * StringValue.escape: 86%
 
 Table of new coverage:
+* Calc                36 %
 
 * StringValue.escape: 100%
 
 Test cases added:
+
+* [Calc refactoring](https://github.com/soffan20/sirix/blob/master/bundles/sirix-core/src/test/java/org/sirix/utils/CalcTest.java)
 
 * [StringValue.escape](https://github.com/soffan20/sirix/blob/734bea335d246aa44507ff88e3409b2a53eb3bf6/bundles/sirix-core/src/test/java/org/sirix/service/json/serializer/StringValueTest.java)
 
