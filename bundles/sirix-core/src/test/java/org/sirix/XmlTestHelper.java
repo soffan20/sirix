@@ -49,6 +49,7 @@ import org.sirix.node.NodeKind.DumbNode;
 import org.sirix.node.SirixDeweyID;
 import org.sirix.node.interfaces.Record;
 import org.sirix.settings.CharsForSerializing;
+import org.sirix.utils.Calc;
 import org.sirix.utils.TypedValue;
 import org.sirix.utils.XmlDocumentCreator;
 
