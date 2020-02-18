@@ -172,9 +172,24 @@ its output?
 
 1. How detailed is your coverage measurement?
 
+Our coverage tool is very crude and has only measure line coverage in the non-exceptional path.
+It simply accumulates a counter passed into it through a function call. The
+total statistics are store in static variables in the instrumented classes to
+accumulate measurements cross multiple objects during the total run time of the
+tests.
+
 2. What are the limitations of your own tool?
 
+Our tool is very limited and does no exception handling or instrumenting of
+code using reflection. This means ternaries are counted as one line of code and
+not a branch.
+
 3. Are the results of your tool consistent with existing coverage tools?
+
+The tool successfully counted the line coverage of all the chosen functions and
+it matched the measurement values of Intellij's built in coverage tool. Given
+how short the coverage tool we found our approach to be good enough given the
+time limit.
 
 ### Coverage improvement
 
