@@ -243,8 +243,19 @@ CHANGE LINK TO REFACTORED FUNCTIONS
  [Nodekind.deserialize](https://github.com/soffan20/sirix/blob/513d23f929e28b3d333ce784e55f248700af452e/bundles/sirix-core/src/main/java/org/sirix/node/NodeKind.java#L1062-L1091)
 
 
+## Pull requests
+
+* [Emil Gedda: Reduce cyclomatic complexity in service.json.serialize.StringValue.escape](https://github.com/sirixdb/sirix/pull/196)
+* [Mikael Karlsson: Bugfix/JsonNumber. stringToNumber](https://github.com/sirixdb/sirix/pull/201)
+* [Andreas Rohlén: Refactor/SirixDeweyID.setDivisionBitArray: Reduced the cyclomatic complexity from 29 to 8](https://github.com/sirixdb/sirix/pull/202)
+* [Daniel Schmekel: refactor: Removed code repetion in the calc class and created tests ...] (https://github.com/sirixdb/sirix/pull/203)
+
+These merged pull requests substitutes the P+ requirement of writing 4 tests, except for Louise Zetterlund wrote 4 tests instead of a submitting a pull request upstream.
+
 ## Overall experience
 
 What are your main take-aways from this project? What did you learn?
 
 Is there something special you want to mention here?
+
+
