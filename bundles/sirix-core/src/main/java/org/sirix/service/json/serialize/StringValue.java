@@ -4,14 +4,15 @@ import org.sirix.utils.Coverage;
 
 public final class StringValue {
   public static Coverage cov = new Coverage();
+
   public static String escape(final String value) {
-    var fun = cov.inFunction("StringValue.escape", 63);
-    fun.inBranch(0, 8);
+    var fun = cov.inFunction("StringValue.escape", 46);
+    fun.inBranch(0, 7);
     final StringBuilder sb = new StringBuilder();
     final int len = value.length();
 
     for (int i = 0; i < len; i++) {
-      fun.inBranch(1, 2);
+      fun.inBranch(1, 3);
       char ch = value.charAt(i);
       switch (ch) {
         case '"':
@@ -55,7 +56,7 @@ public final class StringValue {
             String ss = Integer.toHexString(ch);
             sb.append("\\u");
             for (int k = 0; k < 4 - ss.length(); k++) {
-              fun.inBranch(12, 2);
+              fun.inBranch(12, 3);
               sb.append('0');
             }
             sb.append(ss.toUpperCase());
