@@ -30,7 +30,7 @@ Not documented.
  * [TypedValues.getBytes](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/utils/TypedValue.java#L233-L269): 8
  * [SirixDeweyID.setDivisionBitArray](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L501-L651): 29
  * [StringValue.escape](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52): 18
- * [Nodekind.deserialize](https://github.com/soffan20/sirix/blob/513d23f929e28b3d333ce784e55f248700af452e/bundles/sirix-core/src/main/java/org/sirix/node/NodeKind.java#L1062-L1091): 8
+ * [Nodekind.deserialize](https://github.com/soffan20/sirix/blob/3becfd7760fbfb7af5b635c7d373340a3fd1979f/bundles/sirix-core/src/main/java/org/sirix/node/NodeKind.java#L1062): 8
 
 
 Did all tools/methods get the same result?
@@ -43,55 +43,70 @@ If you want to see coverage for a class, you need to run all tests since the met
 
 2. Are the functions just complex, or also long?
 
- * toBytes: 30 lines, so quite long.
- * getDivisionBits: 18 lines, so not very long.
- * compareUAsPrefix: About 20 lines, so not very long.
- * compareAsPrefix: About 20 lines, so not very long.
- * stringToNumber: 24 lines, so not very long.
- * getType: 4 lines, so not long.
- * getBytes: 16 lines, so medium.
- * setDivisionBitArray: 79 lines, so very long.
- * escape: 46 lines long, not very complex.
- * deserialize: Roughly 30 lines of code but longer than needed, but not too complex.
+ * **toBytes**: 30 lines, so quite long.
+ * **getDivisionBits**: 18 lines, so not very long.
+ * **compareUAsPrefix**: About 20 lines, so not very long.
+ * **compareAsPrefix**: About 20 lines, so not very long.
+ * **stringToNumber**: 24 lines, so not very long.
+ * **getType**: 4 lines, so not long.
+ * **getBytes**: 16 lines, so medium.
+ * **setDivisionBitArray**: 79 lines, so very long.
+ * **escape**: 46 lines long, not very complex.
+ * **deserialize**: Roughly 30 lines of code but longer than needed, but not too complex.
 
 3. What is the purpose of the functions and why should the complexity be high (or not)?
 
-* toBytes: Convert int array into byte array. The outcome is always the same, the branches depend on the size of the input. Should not be high, but is since they used many if-statements.
-* getDivisionBits: Calculates the number of bits needed to store the chosen value. The outcome depend of the size of the input. Should not be high, but is since they used many if-statements
-* compareUAsPrefix: Compare 2 unsigned values to see which is the largest.
-* compareAsPrefix: Compare 2 prefixes to see which is the largest.
-* stringToNumber: Convert a String into other types depending on the value.
-* getType: Return the most common type of 2 atomic operands form an XML schema.
-* getBytes: Convert String into a byte array.
-* setDivisionBitArray: Divide the bits of a byte array by a given divisor.
-* escape: The function escapes control characters and specific unicode characters in a string.
-* deserialize: Deserialize JSON strings into a node type for the internal Abstract Syntax Tree
+* **toBytes**: Convert int array into byte array. The outcome is always the same, the branches depend on the size of the input. Should not be high, but is since they used many if-statements.
+
+* **getDivisionBits**: Calculates the number of bits needed to store the chosen value. The outcome depend of the size of the input. Should not be high, but is since they used many if-statements
+
+* **compareUAsPrefix**: Compare 2 unsigned values to see which is the largest.
+
+* **compareAsPrefix**: Compare 2 prefixes to see which is the largest.
+
+* **stringToNumber**: Convert a String into other types depending on the value.
+
+* **getType**: Return the most common type of 2 atomic operands form an XML schema.
+
+* **getBytes**: Convert String into a byte array.
+
+* **setDivisionBitArray**: Divide the bits of a byte array by a given divisor.
+
+* **escape**: The function escapes control characters and specific unicode
+  characters in a string. The main complexity comes from the use of a switch
+  statement and aswell as manual loops and checks instead of using the standard
+  library to reduce boilerplate.
+
+* **deserialize**: Deserialize JSON strings into a node type for the internal
+  Abstract Syntax Tree. Just like **escape** the main complexity was a switch
+  case statement which could be refactored into a array indexing operation.
+
 
 4. Are exceptions taken into account in the given measurements?
 
- * toBytes: No exceptions exist.
- * getDivisionBits: No exceptions exist.
- * compareUAsPrefix: No exceptions exist.
- * compareAsPrefix: No exceptions exist.
- * stringToNumber: Yes, there are two exceptions.
- * getType: No exceptions exist.
- * getBytes: Yes, one exception exists.
- * setDivisionBitArray: No exceptions exist.
- * escape: No exceptions exist.
- * deserialize: AssertionError is thrown when the assumed type of the string to be parsed is not one of the specified number formats.
+ * **toBytes**: No exceptions exist.
+ * **getDivisionBits**: No exceptions exist.
+ * **compareUAsPrefix**: No exceptions exist.
+ * **compareAsPrefix**: No exceptions exist.
+ * **stringToNumber**: Yes, there are two exceptions.
+ * **getType**: No exceptions exist.
+ * **getBytes**: Yes, one exception exists.
+ * **setDivisionBitArray**: No exceptions exist.
+ * **escape**: No exceptions exist.
+ * **deserialize**: AssertionError is thrown when the assumed type of the string to be parsed is not one of the specified number formats.
 
 5. Is the documentation clear w.r.t. all the possible outcomes?
 
- * toBytes: No documentation at all.
- * getDivisionBits: The exists some comments, but very high-level.
- * compareUAsPrefix: No documentation at all.
- * compareAsPrefix: No documentation at all.
- * stringToNumber: No documentation at all.
- * getType: There exists some documentation, but is not very detailed.
- * getBytes: There exists some documentation, but is not very detailed.
- * setDivisionBitArray: There exists some documentation, but is not very detailed.
- * escape: No documentation at all but one reference to the Unicode standard.
- * deserialize: No documentation at all.
+ * **toBytes**: No documentation at all.
+ * **getDivisionBits**: The exists some comments, but very high-level.
+ * **compareUAsPrefix**: No documentation at all.
+ * **compareAsPrefix**: No documentation at all.
+ * **stringToNumber**: No documentation at all.
+ * **getType**: There exists some documentation, but is not very detailed.
+ * **getBytes**: There exists some documentation, but is not very detailed.
+ * **setDivisionBitArray**: There exists some documentation, but is not very detailed.
+ * **escape**: No documentation at all but one reference to the Unicode standard.
+ * **deserialize**: No documentation at all.
 
 ## Coverage
 
@@ -116,7 +131,7 @@ and
  * [TypedValues.getBytes](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/utils/TypedValue.java#L233-L269)
  * [SirixDeweyID.setDivisionBitArray](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L501-L651)
  * [StringValue.escape](https://github.com/soffan20/sirix/blob/af439874b3359f4e50724f4467e3a1b21b94ace4/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L8-L68)
- * [Nodekind.deserialize](https://github.com/soffan20/sirix/blob/513d23f929e28b3d333ce784e55f248700af452e/bundles/sirix-core/src/main/java/org/sirix/node/NodeKind.java#L1062-L1091)
+ * [Nodekind.deserialize](https://github.com/soffan20/sirix/blob/dba9769cb2f168a2df9ee98fcfa7358ed1535818/bundles/sirix-core/src/main/java/org/sirix/node/NodeKind.java#L1062)
 
 What kinds of constructs does your tool support, and how accurate is
 its output?
