@@ -54,10 +54,10 @@ If you want to see coverage for a class, you need to run all tests since the met
  * escape: 46 lines long, not very complex.
  * deserialize: Roughly 30 lines of code but longer than needed, but not too complex.
 
-3. What is the purpose of the functions?
+3. What is the purpose of the functions and why should the complexity be high (or not)?
 
-* toBytes: Convert int array into byte array.
-* getDivisionBits: Calculates the number of bits needed to store the chosen value.
+* toBytes: Convert int array into byte array. The outcome is always the same, the branches depend on the size of the input. Should not be high, but is since they used many if-statements.
+* getDivisionBits: Calculates the number of bits needed to store the chosen value. The outcome depend of the size of the input. Should not be high, but is since they used many if-statements
 * compareUAsPrefix: Compare 2 unsigned values to see which is the largest.
 * compareAsPrefix: Compare 2 prefixes to see which is the largest.
 * stringToNumber: Convert a String into other types depending on the value.
