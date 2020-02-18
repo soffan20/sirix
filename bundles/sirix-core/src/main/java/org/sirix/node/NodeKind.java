@@ -1061,32 +1061,41 @@ public enum NodeKind implements NodePersistenter {
     @Override
     public Record deserialize(final DataInput source, final @Nonnegative long recordID, final SirixDeweyID deweyID,
         final PageReadOnlyTrx pageReadTrx) throws IOException {
+      // Cyclomatic complexity: 1
       final BigInteger hashCode = getHash(source, pageReadTrx);
       final byte valueType = source.readByte();
       final Number number;
 
       switch (valueType) {
         case 0:
+          // Cyclomatic complexity: 2
           number = source.readDouble();
           break;
         case 1:
+          // Cyclomatic complexity: 3
           number = source.readFloat();
           break;
         case 2:
           number = source.readInt();
+          number = deserializeBigInteger(source);
+          // Cyclomatic complexity: 4
           break;
         case 3:
           number = source.readLong();
+          // Cyclomatic complexity: 5
           break;
         case 4:
+          // Cyclomatic complexity: 6
           number = deserializeBigInteger(source);
           break;
         case 5:
+          // Cyclomatic complexity: 7
           final BigInteger bigInt = deserializeBigInteger(source);
           final int scale = source.readInt();
           number = new BigDecimal(bigInt, scale);
           break;
         default:
+          // Cyclomatic complexity: 8
           throw new AssertionError("Type not known.");
       }
 
