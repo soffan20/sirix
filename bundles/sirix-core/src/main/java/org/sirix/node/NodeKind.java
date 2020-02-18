@@ -1061,34 +1061,44 @@ public enum NodeKind implements NodePersistenter {
     @Override
     public Record deserialize(final DataInput source, final @Nonnegative long recordID, final SirixDeweyID deweyID,
         final PageReadOnlyTrx pageReadTrx) throws IOException {
+      var fun = ObjectNumberNode.cov.inFunction("ObjectNumberNode.deserialize", 50);
+      fun.inBranch(0, 6);
       final BigInteger hashCode = getHash(source, pageReadTrx);
       final byte valueType = source.readByte();
       final Number number;
 
       switch (valueType) {
         case 0:
+          fun.inBranch(1, 3);
           number = source.readDouble();
           break;
         case 1:
+          fun.inBranch(2, 3);
           number = source.readFloat();
           break;
         case 2:
+          fun.inBranch(3, 3);
           number = source.readInt();
           break;
         case 3:
+          fun.inBranch(4, 3);
           number = source.readLong();
           break;
         case 4:
+          fun.inBranch(5, 3);
           number = deserializeBigInteger(source);
           break;
         case 5:
+          fun.inBranch(6, 5);
           final BigInteger bigInt = deserializeBigInteger(source);
           final int scale = source.readInt();
           number = new BigDecimal(bigInt, scale);
           break;
         default:
+          fun.inBranch(7, 2);
           throw new AssertionError("Type not known.");
       }
+      fun.inBranch(8, 6);
 
       // Node delegate.
       final NodeDelegate nodeDel = deserializeNodeDelegate(source, recordID, deweyID, pageReadTrx);

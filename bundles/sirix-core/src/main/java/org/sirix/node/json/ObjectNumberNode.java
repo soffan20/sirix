@@ -28,6 +28,7 @@ import org.sirix.node.delegates.StructNodeDelegate;
 import org.sirix.node.immutable.json.ImmutableNumberNode;
 import org.sirix.node.immutable.json.ImmutableObjectNumberNode;
 import org.sirix.node.interfaces.StructNode;
+import org.sirix.utils.Coverage;
 
 import java.math.BigInteger;
 
@@ -40,6 +41,7 @@ import java.math.BigInteger;
  */
 public final class ObjectNumberNode extends AbstractNumberNode {
 
+  public static Coverage cov = new Coverage();
   /**
    * Constructor.
    *
