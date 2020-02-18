@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2011, University of Konstanz, Distributed Systems Group All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification, are permitted
  * provided that the following conditions are met: * Redistributions of source code must retain the
  * above copyright notice, this list of conditions and the following disclaimer. * Redistributions
@@ -8,7 +8,7 @@
  * following disclaimer in the documentation and/or other materials provided with the distribution.
  * * Neither the name of the University of Konstanz nor the names of its contributors may be used to
  * endorse or promote products derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE
@@ -30,6 +30,7 @@ import org.sirix.exception.SirixXPathException;
 import org.sirix.service.xml.xpath.AtomicValue;
 import org.sirix.service.xml.xpath.functions.Function;
 import org.sirix.service.xml.xpath.types.Type;
+import org.sirix.utils.Coverage;
 
 /**
  * <h1>GeneralComp</h1>
@@ -39,17 +40,17 @@ import org.sirix.service.xml.xpath.types.Type;
  * </p>
  */
 public class GeneralComp extends AbstractComparator {
-
+  public static Coverage cov = new Coverage();
   /**
    * Constructor. Initializes the internal state.
-   * 
+   *
    * @param rtx Exclusive (immutable) trx to iterate with.
    * @param mOperand1 First value of the comparison
    * @param mOperand2 Second value of the comparison
    * @param mCom comparison kind
    */
   public GeneralComp(final XmlNodeReadOnlyTrx rtx, final Axis mOperand1, final Axis mOperand2,
-      final CompKind mCom) {
+                     final CompKind mCom) {
 
     super(rtx, mOperand1, mOperand2, mCom);
   }
@@ -59,7 +60,7 @@ public class GeneralComp extends AbstractComparator {
    */
   @Override
   protected boolean compare(final AtomicValue[] mOperand1, final AtomicValue[] mOperand2)
-      throws SirixXPathException {
+          throws SirixXPathException {
 
     assert mOperand1.length >= 1 && mOperand2.length >= 1;
 
@@ -87,7 +88,7 @@ public class GeneralComp extends AbstractComparator {
     AtomicValue atomized;
     // cast to double, if compatible with XPath 1.0 and <, >, >=, <=
     final boolean convert =
-        !(!XPATH_10_COMP || getCompKind() == CompKind.EQ || getCompKind() == CompKind.EQ);
+            !(!XPATH_10_COMP || getCompKind() == CompKind.EQ || getCompKind() == CompKind.EQ);
 
     boolean first = true;
     do {
@@ -110,22 +111,24 @@ public class GeneralComp extends AbstractComparator {
    * {@inheritDoc}
    */
   @Override
+  //4 rader 2 grona 2 roda => 50% coverage
   protected Type getType(final int mKey1, final int mKey2) throws SirixXPathException {
-
+    var fun = cov.inFunction("GeneralComp.getType", 4);
     final Type mType1 = Type.getType(mKey1).getPrimitiveBaseType();
     final Type mType2 = Type.getType(mKey2).getPrimitiveBaseType();
-
     if (XPATH_10_COMP) {
       if (mType1.isNumericType() || mType2.isNumericType()) {
+        fun.inBranch(0, 1);
         return Type.DOUBLE;
       }
 
-      if (mType1 == Type.STRING || mType2 == Type.STRING
-          || (mType1 == Type.UNTYPED_ATOMIC && mType2 == Type.UNTYPED_ATOMIC)) {
+      if (mType1 == Type.STRING || mType2 == Type.STRING  || (mType1 == Type.UNTYPED_ATOMIC && mType2 == Type.UNTYPED_ATOMIC)) {
+        fun.inBranch(1, 1);
         return Type.STRING;
       }
 
       if (mType1 == Type.UNTYPED_ATOMIC || mType2 == Type.UNTYPED_ATOMIC) {
+        fun.inBranch(2, 1);
         return Type.UNTYPED_ATOMIC;
 
       }
@@ -164,7 +167,7 @@ public class GeneralComp extends AbstractComparator {
       }
 
     }
-
+    fun.inBranch(0, 1);
     return Type.getLeastCommonType(mType1, mType2);
 
   }
