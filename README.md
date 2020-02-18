@@ -42,13 +42,9 @@ for each project, along with reason(s) why you changed to a different one.
 
     setDivisionBitArray: 29
 
-    [StringValue.escape (before)](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52): 18
+    [StringValue.escape](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52): 18
 
-    [StringValue.escape (after)](https://github.com/soffan20/sirix/blob/c2d7f24060b3f92c42f7cac52d9f57b08709b813/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L6-L43): 2
-
-    [Nodekind.deserialize (before)](https://github.com/soffan20/sirix/blob/513d23f929e28b3d333ce784e55f248700af452e/bundles/sirix-core/src/main/java/org/sirix/node/NodeKind.java#L1062-L1091): 8
-
-    [NodeKind.deserialize (after)](https://github.com/soffan20/sirix/blob/c2d7f24060b3f92c42f7cac52d9f57b08709b813/bundles/sirix-core/src/main/java/org/sirix/node/NodeKind.java#L1071-L1103): 2
+    [Nodekind.deserialize](https://github.com/soffan20/sirix/blob/513d23f929e28b3d333ce784e55f248700af452e/bundles/sirix-core/src/main/java/org/sirix/node/NodeKind.java#L1062-L1091): 8
 
 
 * Did all tools/methods get the same result?
@@ -72,9 +68,9 @@ for each project, along with reason(s) why you changed to a different one.
 
     setDivisionBitArray: 79 lines, so very long.
 
-    [StringValue.escape](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52): 46 lines long, not very complex.
+    escape: 46 lines long, not very complex.
 
-    [Nodekind.deserialize](https://github.com/soffan20/sirix/blob/513d23f929e28b3d333ce784e55f248700af452e/bundles/sirix-core/src/main/java/org/sirix/node/NodeKind.java#L1062-L1091): Roughly 30 lines of code but longer than needed, but not too complex.
+    deserialize: Roughly 30 lines of code but longer than needed, but not too complex.
 
 3. What is the purpose of the functions?
 
@@ -94,9 +90,9 @@ for each project, along with reason(s) why you changed to a different one.
 
     setDivisionBitArray: Divide the bits of a byte array by a given divisor.
 
-    [StringValue.escape](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52): The function escapes control characters and specific unicode characters in a string.
+    escape: The function escapes control characters and specific unicode characters in a string.
 
-    [Nodekind.deserialize](https://github.com/soffan20/sirix/blob/513d23f929e28b3d333ce784e55f248700af452e/bundles/sirix-core/src/main/java/org/sirix/node/NodeKind.java#L1062-L1091): Deserialize JSON strings into a node type for the internal Abstract Syntax Tree
+    deserialize: Deserialize JSON strings into a node type for the internal Abstract Syntax Tree
 4. Are exceptions taken into account in the given measurements?
 
     toBytes: No exceptions exist.
@@ -115,9 +111,9 @@ for each project, along with reason(s) why you changed to a different one.
 
     setDivisionBitArray: No exceptions exist.
 
-    [StringValue.escape](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52): No exceptions exist.
+    escape: No exceptions exist.
 
-    [Nodekind.deserialize](https://github.com/soffan20/sirix/blob/513d23f929e28b3d333ce784e55f248700af452e/bundles/sirix-core/src/main/java/org/sirix/node/NodeKind.java#L1062-L1091): AssertionError is thrown when the assumed type of the string to be parsed is not one of the specified number formats.
+   deserialize: AssertionError is thrown when the assumed type of the string to be parsed is not one of the specified number formats.
 
 5. Is the documentation clear w.r.t. all the possible outcomes?
 
@@ -137,9 +133,9 @@ for each project, along with reason(s) why you changed to a different one.
 
     setDivisionBitArray: There exists some documentation, but is not very detailed.
 
-    [StringValue.escape](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52): No documentation at all but one reference to the Unicode standard.
+    escape: No documentation at all but one reference to the Unicode standard.
 
-    [Nodekind.deserialize](https://github.com/soffan20/sirix/blob/513d23f929e28b3d333ce784e55f248700af452e/bundles/sirix-core/src/main/java/org/sirix/node/NodeKind.java#L1062-L1091): No documentation at all.
+    deserialize: No documentation at all.
 
 ## Coverage
 
@@ -147,20 +143,27 @@ for each project, along with reason(s) why you changed to a different one.
 
 We used the built-in tool in IntelliJ. It was very easy to use.
 
-Document your experience in using a "new"/different coverage tool.
+### DIY
 
-How well was the tool documented? Was it possible/easy/difficult to
-integrate it with your build environment?
+ [SirixDeweyID.toBytes](https://github.com/soffan20/sirix/blob/b0ad26f30c1ba59dc361434599762dd235a3d49a/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L629-L681)
 
-### DYI
+ [SirixDeweyID.getDivisionBits](https://github.com/soffan20/sirix/blob/b0ad26f30c1ba59dc361434599762dd235a3d49a/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L465-L494)
 
-Show a patch (or link to a branch) that shows the instrumented code to
-gather coverage measurements.
+ [compareUAsPrefix](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52)
 
-The patch is probably too long to be copied here, so please add
-the git command that is used to obtain the patch instead:
+ [compareAsPrefix](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52)
 
-git diff ...
+ [JsonNumber.stringToNumber](https://github.com/soffan20/sirix/blob/31c4f23eb5037c8976270a143a680ac97e1ce25b/bundles/sirix-core/src/main/java/org/sirix/service/json/JsonNumber.java#L10-L58)
+
+ [GeneralComp.getType](https://github.com/soffan20/sirix/blob/31c4f23eb5037c8976270a143a680ac97e1ce25b/bundles/sirix-core/src/main/java/org/sirix/service/xml/xpath/comparators/GeneralComp.java#L115-L173)
+
+ [TypedValues.getBytes](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/utils/TypedValue.java#L233-L269)
+
+ [SirixDeweyID.setDivisionBitArray](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L501-L651)
+
+ [StringValue.escape](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52)
+
+ [Nodekind.deserialize](https://github.com/soffan20/sirix/blob/513d23f929e28b3d333ce784e55f248700af452e/bundles/sirix-core/src/main/java/org/sirix/node/NodeKind.java#L1062-L1091)
 
 What kinds of constructs does your tool support, and how accurate is
 its output?
