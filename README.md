@@ -92,7 +92,13 @@ Are the results clear?
 
 ### Tools
 
-We used the built-in tool in IntelliJ. It was very easy to use.
+A small tool for manually instrumenting code was developed and used alongside
+the built-in tool in IntelliJ. It was very easy to use, except that the
+built-in tool was not granular enough.
+The tool consists of
+[Coverage.java](https://github.com/soffan20/sirix/blob/coverage-tool/bundles/sirix-core/src/main/java/org/sirix/utils/Coverage.java)
+and
+[FunctionCoverage.java](https://github.com/soffan20/sirix/blob/coverage-tool/bundles/sirix-core/src/main/java/org/sirix/utils/FunctionCoverage.java).
 
 ### DIY
 
