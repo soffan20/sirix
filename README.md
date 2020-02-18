@@ -25,7 +25,7 @@ Not documented.
  * [SirixDeweyID.getDivisionBits](https://github.com/soffan20/sirix/blob/25fcab99903affa033cac90c325cb0a19435e507/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L462-L490): 9
  * [compareUAsPrefix](https://github.com/soffan20/sirix/blob/25fcab99903affa033cac90c325cb0a19435e507/bundles/sirix-core/src/main/java/org/sirix/utils/Calc.java#L371): 8
  * [compareAsPrefix](https://github.com/soffan20/sirix/blob/25fcab99903affa033cac90c325cb0a19435e507/bundles/sirix-core/src/main/java/org/sirix/utils/Calc.java#L288): 8
- * [JsonNumber.stringToNumber](https://github.com/soffan20/sirix/blob/31c4f23eb5037c8976270a143a680ac97e1ce25b/bundles/sirix-core/src/main/java/org/sirix/service/json/JsonNumber.java#L10-L58): 18
+ * [JsonNumber.stringToNumber](https://github.com/soffan20/sirix/blob/25fcab99903affa033cac90c325cb0a19435e507/bundles/sirix-core/src/main/java/org/sirix/service/json/JsonNumber.java#L6-L53): 10
  * [GeneralComp.getType](https://github.com/soffan20/sirix/blob/31c4f23eb5037c8976270a143a680ac97e1ce25b/bundles/sirix-core/src/main/java/org/sirix/service/xml/xpath/comparators/GeneralComp.java#L115-L173): 18
  * [TypedValues.getBytes](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/utils/TypedValue.java#L233-L269): 8
  * [SirixDeweyID.setDivisionBitArray](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L501-L651): 29
