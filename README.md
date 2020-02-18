@@ -220,7 +220,13 @@ Test cases added:
 
 Plan for refactoring complex code:
 
+Replace if-statements with for-loop. Replace switches with hash maps. Split code
+into several functions. Remove code duplication. 
+
 Estimated impact of refactoring (lower CC, but other drawbacks?).
+
+No, since we literally replace code with the same functions, only less lines or more 
+efficient. 
 
 Carried out refactoring
 
@@ -260,6 +266,6 @@ These merged pull requests substitutes the P+ requirement of writing 4 tests, ex
 
 What are your main take-aways from this project? What did you learn?
 
-Is there something special you want to mention here?
-
+We were surprised that the quality of the code was so bad. We learned to use some tools to check
+the quality of the code and what to focus on.
 
