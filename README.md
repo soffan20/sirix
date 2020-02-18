@@ -34,7 +34,12 @@ Not documented.
 
 
 Did all tools/methods get the same result?
+
+Yes.
+
 Are the results clear?
+
+If you want to see coverage for a class, you need to run all tests since the method could be covered from all possible tests. The intellij coverage tool will only show coverage for the whole class, it is not possible to check coverage for individual methods. To see the coverage for an individual method you have to manually calculate it.
 
 2. Are the functions just complex, or also long?
 
@@ -141,17 +146,23 @@ Table of old coverage:
 * Calc                1 %
 * StringValue.escape: 86%
 * JsonNumber.StringToNumber: 46%
+* TypedValue: 20%
+* SirixDeweyID: 39%
+
 
 Table of new coverage:
 * Calc                36 %
 * StringValue.escape: 100%
 * JsonNumber.StringToNumber: 90%
+* TypedValue: 24%
+* SirixDeweyID: 40%
 
 Test cases added:
 
 * [Calc refactoring](https://github.com/soffan20/sirix/blob/master/bundles/sirix-core/src/test/java/org/sirix/utils/CalcTest.java)
 * [StringValue.escape](https://github.com/soffan20/sirix/blob/734bea335d246aa44507ff88e3409b2a53eb3bf6/bundles/sirix-core/src/test/java/org/sirix/service/json/serializer/StringValueTest.java)
 * [JsonNumber.StringToNumber](https://github.com/soffan20/sirix/blob/c2d7f24060b3f92c42f7cac52d9f57b08709b813/bundles/sirix-core/src/test/java/org/sirix/service/json/shredder/JsonNumberTest.java#L14-L63)
+* [TypedValue.getBytes](https://github.com/soffan20/sirix/blob/master/bundles/sirix-core/src/test/java/org/sirix/utils/TypedValueTest.java)
 
 ## Refactoring
 
