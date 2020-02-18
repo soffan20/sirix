@@ -234,9 +234,9 @@ CHANGE LINK TO REFACTORED FUNCTIONS
 
  [compareAsPrefix](https://github.com/soffan20/sirix/blob/c2d7f24060b3f92c42f7cac52d9f57b08709b813/bundles/sirix-core/src/main/java/org/sirix/utils/Calc.java#L289)
 
- [JsonNumber.stringToNumber](https://github.com/soffan20/sirix/blob/31c4f23eb5037c8976270a143a680ac97e1ce25b/bundles/sirix-core/src/main/java/org/sirix/service/json/JsonNumber.java#L10-L58)
+ [JsonNumber.stringToNumber](https://github.com/soffan20/sirix/blob/c2d7f24060b3f92c42f7cac52d9f57b08709b813/bundles/sirix-core/src/main/java/org/sirix/service/json/JsonNumber.java#L8-L46)
 
- [GeneralComp.getType](https://github.com/soffan20/sirix/blob/31c4f23eb5037c8976270a143a680ac97e1ce25b/bundles/sirix-core/src/main/java/org/sirix/service/xml/xpath/comparators/GeneralComp.java#L115-L173)
+ [GeneralComp.getType](https://github.com/soffan20/sirix/blob/c2d7f24060b3f92c42f7cac52d9f57b08709b813/bundles/sirix-core/src/main/java/org/sirix/service/xml/xpath/comparators/GeneralComp.java#L112-L163)
 
  [TypedValues.getBytes](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/utils/TypedValue.java#L233-L269)
 
