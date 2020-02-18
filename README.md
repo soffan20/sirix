@@ -41,9 +41,9 @@ CHANGE LINK TO BEFORE
 
  [GeneralComp.getType](https://github.com/soffan20/sirix/blob/31c4f23eb5037c8976270a143a680ac97e1ce25b/bundles/sirix-core/src/main/java/org/sirix/service/xml/xpath/comparators/GeneralComp.java#L115-L173): 18
 
- [TypedValues.getBytes](https://github.com/soffan20/sirix/blob/25fcab99903affa033cac90c325cb0a19435e507/bundles/sirix-core/src/main/java/org/sirix/utils/TypedValue.java#L231-L265): 8
+ [TypedValues.getBytes](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/utils/TypedValue.java#L233-L269): 8
 
- [SirixDeweyID.setDivisionBitArray](https://github.com/soffan20/sirix/blob/25fcab99903affa033cac90c325cb0a19435e507/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L495-L613): 29
+ [SirixDeweyID.setDivisionBitArray](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L501-L651): 29
 
 
  [StringValue.escape](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52): 18
@@ -154,9 +154,9 @@ We used the built-in tool in IntelliJ. It was very easy to use.
 
  [SirixDeweyID.getDivisionBits](https://github.com/soffan20/sirix/blob/b0ad26f30c1ba59dc361434599762dd235a3d49a/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L465-L494)
 
- [compareUAsPrefix](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52)
+ [compareUAsPrefix](https://github.com/soffan20/sirix/blob/25fcab99903affa033cac90c325cb0a19435e507/bundles/sirix-core/src/main/java/org/sirix/utils/Calc.java#L371)
 
- [compareAsPrefix](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52)
+ [compareAsPrefix](https://github.com/soffan20/sirix/blob/25fcab99903affa033cac90c325cb0a19435e507/bundles/sirix-core/src/main/java/org/sirix/utils/Calc.java#L288)
 
  [JsonNumber.stringToNumber](https://github.com/soffan20/sirix/blob/31c4f23eb5037c8976270a143a680ac97e1ce25b/bundles/sirix-core/src/main/java/org/sirix/service/json/JsonNumber.java#L10-L58)
 
@@ -226,17 +226,17 @@ CHANGE LINK TO REFACTORED FUNCTIONS
 
  [SirixDeweyID.getDivisionBits](https://github.com/soffan20/sirix/blob/c2d7f24060b3f92c42f7cac52d9f57b08709b813/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L462-L468)
 
- [compareUAsPrefix](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52)
+ [compareUAsPrefix](https://github.com/soffan20/sirix/blob/c2d7f24060b3f92c42f7cac52d9f57b08709b813/bundles/sirix-core/src/main/java/org/sirix/utils/Calc.java#L327)
 
- [compareAsPrefix](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52)
+ [compareAsPrefix](https://github.com/soffan20/sirix/blob/c2d7f24060b3f92c42f7cac52d9f57b08709b813/bundles/sirix-core/src/main/java/org/sirix/utils/Calc.java#L289)
 
  [JsonNumber.stringToNumber](https://github.com/soffan20/sirix/blob/31c4f23eb5037c8976270a143a680ac97e1ce25b/bundles/sirix-core/src/main/java/org/sirix/service/json/JsonNumber.java#L10-L58)
 
  [GeneralComp.getType](https://github.com/soffan20/sirix/blob/31c4f23eb5037c8976270a143a680ac97e1ce25b/bundles/sirix-core/src/main/java/org/sirix/service/xml/xpath/comparators/GeneralComp.java#L115-L173)
 
- [TypedValues.getBytes](https://github.com/soffan20/sirix/blob/c2d7f24060b3f92c42f7cac52d9f57b08709b813/bundles/sirix-core/src/main/java/org/sirix/utils/TypedValue.java#L231-L266)
+ [TypedValues.getBytes](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/utils/TypedValue.java#L233-L269)
 
- [SirixDeweyID.setDivisionBitArray](https://github.com/soffan20/sirix/blob/c2d7f24060b3f92c42f7cac52d9f57b08709b813/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L473-L545)
+ [SirixDeweyID.setDivisionBitArray](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L501-L651)
 
  [StringValue.escape](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52)
 
