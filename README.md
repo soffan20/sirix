@@ -26,25 +26,29 @@ for each project, along with reason(s) why you changed to a different one.
 ## Complexity
 
 1. What were the cyclomatic complexity for the 10 chosen functions?
-    toBytes: 12
 
-    getDivisionBits: 9
+CHANGE LINK TO BEFORE
 
-    compareUAsPrefix: 8
+ [SirixDeweyID.toBytes](https://github.com/soffan20/sirix/blob/b0ad26f30c1ba59dc361434599762dd235a3d49a/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L629-L681): 12
 
-    compareAsPrefix: 8
+ [SirixDeweyID.getDivisionBits](https://github.com/soffan20/sirix/blob/b0ad26f30c1ba59dc361434599762dd235a3d49a/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L465-L494): 9
 
-    stringToNumber: 18
+ [compareUAsPrefix](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52): 8
 
-    getType: 18
+ [compareAsPrefix](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52): 8
 
-    getBytes: 8
+ [JsonNumber.stringToNumber](https://github.com/soffan20/sirix/blob/31c4f23eb5037c8976270a143a680ac97e1ce25b/bundles/sirix-core/src/main/java/org/sirix/service/json/JsonNumber.java#L10-L58): 18
 
-    setDivisionBitArray: 29
+ [GeneralComp.getType](https://github.com/soffan20/sirix/blob/31c4f23eb5037c8976270a143a680ac97e1ce25b/bundles/sirix-core/src/main/java/org/sirix/service/xml/xpath/comparators/GeneralComp.java#L115-L173): 18
 
-    [StringValue.escape](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52): 18
+ [TypedValues.getBytes](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/utils/TypedValue.java#L233-L269): 8
 
-    [Nodekind.deserialize](https://github.com/soffan20/sirix/blob/513d23f929e28b3d333ce784e55f248700af452e/bundles/sirix-core/src/main/java/org/sirix/node/NodeKind.java#L1062-L1091): 8
+ [SirixDeweyID.setDivisionBitArray](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L501-L651): 29
+
+
+ [StringValue.escape](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52): 18
+
+ [Nodekind.deserialize](https://github.com/soffan20/sirix/blob/513d23f929e28b3d333ce784e55f248700af452e/bundles/sirix-core/src/main/java/org/sirix/node/NodeKind.java#L1062-L1091): 8
 
 
 * Did all tools/methods get the same result?
@@ -194,9 +198,30 @@ Plan for refactoring complex code:
 
 Estimated impact of refactoring (lower CC, but other drawbacks?).
 
-Carried out refactoring (optional)
+Carried out refactoring
 
-git diff ...
+CHANGE LINK TO REFACTORED FUNCTIONS
+
+ [SirixDeweyID.toBytes](https://github.com/soffan20/sirix/blob/b0ad26f30c1ba59dc361434599762dd235a3d49a/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L629-L681)
+
+ [SirixDeweyID.getDivisionBits](https://github.com/soffan20/sirix/blob/b0ad26f30c1ba59dc361434599762dd235a3d49a/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L465-L494)
+
+ [compareUAsPrefix](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52)
+
+ [compareAsPrefix](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52)
+
+ [JsonNumber.stringToNumber](https://github.com/soffan20/sirix/blob/31c4f23eb5037c8976270a143a680ac97e1ce25b/bundles/sirix-core/src/main/java/org/sirix/service/json/JsonNumber.java#L10-L58)
+
+ [GeneralComp.getType](https://github.com/soffan20/sirix/blob/31c4f23eb5037c8976270a143a680ac97e1ce25b/bundles/sirix-core/src/main/java/org/sirix/service/xml/xpath/comparators/GeneralComp.java#L115-L173)
+
+ [TypedValues.getBytes](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/utils/TypedValue.java#L233-L269)
+
+ [SirixDeweyID.setDivisionBitArray](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L501-L651)
+
+ [StringValue.escape](https://github.com/soffan20/sirix/blob/f42c0fa64378cc8dac55e2f1a1d50e2c0007a329/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java#L4-L52)
+
+ [Nodekind.deserialize](https://github.com/soffan20/sirix/blob/513d23f929e28b3d333ce784e55f248700af452e/bundles/sirix-core/src/main/java/org/sirix/node/NodeKind.java#L1062-L1091)
+
 
 ## Overall experience
 
