@@ -14,6 +14,7 @@ import java.util.Arrays;
 public final class Calc {
 
   private static final Charset UTF8 = Charset.forName("UTF-8");
+  public static Coverage cov = new Coverage();
 
   public static byte[] fromBigDecimal(BigDecimal i) {
     BigInteger bi = i.unscaledValue();
@@ -287,27 +288,50 @@ public final class Calc {
 
   public final static int compareAsPrefix(byte[] v1, byte[] v2) {
     // a null value is interpreted as EOF (= highest possible value)
+    var fun = cov.inFunction("Calc.compareAsPrefix", 16);
+    fun.inBranch(1, 1);
     if (v1 != null) {
+      fun.inBranch(2, 1);
       if (v2 != null) {
+        fun.inBranch(3, 5);
         int len1 = v1.length;
         int len2 = v2.length;
-        int len = ((len1 <= len2) ? len1 : len2);
+        int len = 0;
+        if(len1 <= len2) {
+          len = len1;
+          fun.inBranch(4, 1);
+        }
+        else {
+          len = len2;
+          fun.inBranch(5, 1);
+        }
         int pos = -1;
         while (++pos < len) {
+          fun.inBranch(6, 1);
           if (v1[pos] != v2[pos]) {
+            fun.inBranch(7, 1);
             return v1[pos] - v2[pos];
           }
         }
-        return (len1 <= len2) ? 0 : 1;
+        if(len1 <= len2){
+          fun.inBranch(8, 1);
+          return 0;
+        } else{
+          fun.inBranch(9, 1);
+          return 1;
+        }
       } else {
         // v2 is EOF and definitely greater than v1
+        fun.inBranch(10, 1);
         return -1;
       }
     } else if (v2 != null) {
       // v1 is EOF and definitely greater than v2
+      fun.inBranch(11, 1);
       return 1;
     } else {
       // both values are EOF
+      fun.inBranch(12, 1);
       return 0;
     }
   }
@@ -370,29 +394,50 @@ public final class Calc {
 
   public final static int compareUAsPrefix(byte[] v1, byte[] v2) {
     // a null value is interpreted as EOF (= highest possible value)
+    var fun = cov.inFunction("Calc.compareUAsPrefix", 15);
+    fun.inBranch(1, 1);
     if (v1 != null) {
+      fun.inBranch(2, 1);
       if (v2 != null) {
         int len1 = v1.length;
         int len2 = v2.length;
-        int len = ((len1 <= len2) ? len1 : len2);
+        int len = 0;
+        if(len1 <= len2){
+          fun.inBranch(3, 1);
+          len =len1;}
+        else {
+          fun.inBranch(4, 1);
+          len = len2;}
         int pos = -1;
+        fun.inBranch(5, 4);
         while (++pos < len) {
           int b1 = v1[pos] & 0xFF;
           int b2 = v2[pos] & 0xFF;
+          fun.inBranch(6, 3);
           if (b1 != b2) {
+            fun.inBranch(7, 1);
             return b1 - b2;
           }
         }
-        return (len1 <= len2) ? 0 : 1;
+        if(len1 <= len2){
+          fun.inBranch(8, 1);
+          return 0;
+        } else{
+          fun.inBranch(9, 1);
+          return 1;
+        }
       } else {
         // v2 is EOF and definitely greater than v1
+        fun.inBranch(10, 1);
         return -1;
       }
     } else if (v2 != null) {
+      fun.inBranch(11, 1);
       // v1 is EOF and definitely greater than v2
       return 1;
     } else {
       // both values are EOF
+      fun.inBranch(12, 1);
       return 0;
     }
   }
