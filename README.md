@@ -166,7 +166,7 @@ Show the comments that describe the requirements for the coverage.
 
 Table of old coverage:
 * Calc                1 %
-* StringValue.escape: 86%
+* StringValue.escape: 80%
 * JsonNumber.StringToNumber: 46%
 * TypedValue: 20%
 * SirixDeweyID: 39%
