@@ -68,9 +68,9 @@ If you want to see coverage for a class, you need to run all tests since the met
 
 * **getType**: Return the most common type of 2 atomic operands form an XML schema.
 
-* **getBytes**: Convert String into a byte array.
+* **getBytes**: The purpose of this function is to convert a String into a byte array. The branches in this function represent possible special characters that can be present in the string. These special characters are “&” and “<”. There are additional branches for when the string is empty and for when the conversion fails, for which an exception is thrown.
 
-* **setDivisionBitArray**: Divide the bits of a byte array by a given divisor.
+* **setDivisionBitArray**: The purpose of this function is to divide the bits of a byte array by a given divisor. The different branches are dependent on what the values in the maxDivisionValue array in the class are. Depending on if the division value is less than or equal to a certain value in the maxDivisionValue array, a different branch is going to be executed. These different branches determine what the prefix and suffix of of the byte array is. This then affects the later calculations of the division.
 
 * **escape**: The function escapes control characters and specific unicode
   characters in a string. The main complexity comes from the use of a switch
@@ -225,4 +225,3 @@ What are your main take-aways from this project? What did you learn?
 
 We were surprised that the quality of the code was so bad. We learned to use some tools to check
 the quality of the code and what to focus on.
-
