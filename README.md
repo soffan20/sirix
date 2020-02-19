@@ -135,6 +135,7 @@ and
 
 What kinds of constructs does your tool support, and how accurate is
 its output?
+We don't support other than execution of sequential blocks of code.
 
 ### Evaluation
 
