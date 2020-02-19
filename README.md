@@ -60,13 +60,13 @@ If you want to see coverage for a class, you need to run all tests since the met
 
 * **getDivisionBits**: Calculates the number of bits needed to store the chosen value. The outcome depend of the size of the input. Should not be high, but is since they used many if-statements
 
-* **compareUAsPrefix**: Compare 2 unsigned values to see which is the largest.
+* **compareUAsPrefix**: Compare 2 unsigned values to see which is the largest. The complexity in this function comes from the way the program handles null values as input. They are treated as the largest possible value, and since it takes two variables as input, they got to treat all the combinations of null and not null for both variables. This parts needs to be done in many parts of the code however and thus should probably be it's own function.  
 
-* **compareAsPrefix**: Compare 2 prefixes to see which is the largest.
+* **compareAsPrefix**: Compare 2 prefixes to see which is the largest. Same as above since the only difference is that it's signed.
 
-* **stringToNumber**: The function handles different cases depending on the size of the numeric value of the string, then the function must have some sort of if statements as the function needs to handle different cases. But they could have divided the function into several smaller functions to make the code more readable. Since there is no documentation, it is unclear why the String needs to be converted into different types depending on the size of the numeric value and not just converted into a double directly which had greatly reduced complexity. This question is reasonable to ask since the function contains a bug, if the function gets a decimal number as input that should return a double, the function rounds the value to a smaller float and returns it. This is because the method Float.valueOf(stringValue) rounds stringValue to a Float, so the method will never use the line Double.valueOf(stringValue).
+* **stringToNumber**: Convert a String into other types depending on the value.
 
-* **getType**: The function checks whether the evaluation is compatible to XPath 1.0. (https://www.w3.org/TR/1999/REC-xpath-19991116/) or not by checking a Boolean x that is set to true. This divides the function into two cases, whether it is compatible with XPath 1.0. or not. The case when it is not compatible could be handled in a separate method since it doesn’t seem to happen that often as x is hard coded to true and i can’t find it being changed anywhere in the code.  So by moving that case to a seperate method the complexity is halved. 
+* **getType**: Return the most common type of 2 atomic operands form an XML schema.
 
 * **getBytes**: The purpose of this function is to convert a String into a byte array. The branches in this function represent possible special characters that can be present in the string. These special characters are “&” and “<”. There are additional branches for when the string is empty and for when the conversion fails, for which an exception is thrown.
 
