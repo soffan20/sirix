@@ -166,7 +166,7 @@ Show the comments that describe the requirements for the coverage.
 
 Table of old coverage:
 * Calc                1 %
-* StringValue.escape: 86%
+* StringValue.escape: 80%
 * JsonNumber.StringToNumber: 46%
 * TypedValue: 20%
 * SirixDeweyID: 39%
@@ -198,18 +198,18 @@ Estimated impact of refactoring (lower CC, but other drawbacks?).
 No, since we literally replace code with the same functions, only less lines or more
 efficient.
 
-Carried out refactoring
+Carried out refactoring with their new cyclomatic complexities
 
- * [SirixDeweyID.toBytes](https://github.com/soffan20/sirix/blob/c2d7f24060b3f92c42f7cac52d9f57b08709b813/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L557-L590)
- * [SirixDeweyID.getDivisionBits](https://github.com/soffan20/sirix/blob/c2d7f24060b3f92c42f7cac52d9f57b08709b813/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L462-L468)
- * [compareUAsPrefix](https://github.com/soffan20/sirix/blob/c2d7f24060b3f92c42f7cac52d9f57b08709b813/bundles/sirix-core/src/main/java/org/sirix/utils/Calc.java#L327)
- * [compareAsPrefix](https://github.com/soffan20/sirix/blob/c2d7f24060b3f92c42f7cac52d9f57b08709b813/bundles/sirix-core/src/main/java/org/sirix/utils/Calc.java#L289)
- * [JsonNumber.stringToNumber](https://github.com/soffan20/sirix/blob/31c4f23eb5037c8976270a143a680ac97e1ce25b/bundles/sirix-core/src/main/java/org/sirix/service/json/JsonNumber.java#L10-L58)
- * [GeneralComp.getType](https://github.com/soffan20/sirix/blob/31c4f23eb5037c8976270a143a680ac97e1ce25b/bundles/sirix-core/src/main/java/org/sirix/service/xml/xpath/comparators/GeneralComp.java#L115-L173)
- * [TypedValues.getBytes](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/utils/TypedValue.java#L233-L269)
- * [SirixDeweyID.setDivisionBitArray](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L501-L651)
- * [StringValue.escape](https://github.com/soffan20/sirix/blob/92aad315305016d56f7dbf8aae469ac80c8e8ee3/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java)
- * [Nodekind.deserialize](https://github.com/soffan20/sirix/blob/c2d7f24060b3f92c42f7cac52d9f57b08709b813/bundles/sirix-core/src/main/java/org/sirix/node/NodeKind.java#L1071-L1103)
+ * [SirixDeweyID.toBytes](https://github.com/soffan20/sirix/blob/c2d7f24060b3f92c42f7cac52d9f57b08709b813/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L557-L590): 7
+ * [SirixDeweyID.getDivisionBits](https://github.com/soffan20/sirix/blob/c2d7f24060b3f92c42f7cac52d9f57b08709b813/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L462-L468): 3
+ * [compareUAsPrefix](https://github.com/soffan20/sirix/blob/c2d7f24060b3f92c42f7cac52d9f57b08709b813/bundles/sirix-core/src/main/java/org/sirix/utils/Calc.java#L327): 5
+ * [compareAsPrefix](https://github.com/soffan20/sirix/blob/c2d7f24060b3f92c42f7cac52d9f57b08709b813/bundles/sirix-core/src/main/java/org/sirix/utils/Calc.java#L289): 5
+ * [JsonNumber.stringToNumber](https://github.com/soffan20/sirix/blob/31c4f23eb5037c8976270a143a680ac97e1ce25b/bundles/sirix-core/src/main/java/org/sirix/service/json/JsonNumber.java#L10-L58): 5
+ * [GeneralComp.getType](https://github.com/soffan20/sirix/blob/31c4f23eb5037c8976270a143a680ac97e1ce25b/bundles/sirix-core/src/main/java/org/sirix/service/xml/xpath/comparators/GeneralComp.java#L115-L173): 10
+ * [TypedValues.getBytes](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/utils/TypedValue.java#L233-L269): 4
+ * [SirixDeweyID.setDivisionBitArray](https://github.com/soffan20/sirix/blob/ceff1cbc847298e91d64f291eb6651161e34ff76/bundles/sirix-core/src/main/java/org/sirix/node/SirixDeweyID.java#L501-L651): 13
+ * [StringValue.escape](https://github.com/soffan20/sirix/blob/92aad315305016d56f7dbf8aae469ac80c8e8ee3/bundles/sirix-core/src/main/java/org/sirix/service/json/serialize/StringValue.java): 2
+ * [Nodekind.deserialize](https://github.com/soffan20/sirix/blob/c2d7f24060b3f92c42f7cac52d9f57b08709b813/bundles/sirix-core/src/main/java/org/sirix/node/NodeKind.java#L1071-L1103): 2
 
 ## Pull requests
 
