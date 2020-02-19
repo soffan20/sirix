@@ -226,3 +226,7 @@ What are your main take-aways from this project? What did you learn?
 
 We were surprised that the quality of the code was so bad. We learned to use some tools to check
 the quality of the code and what to focus on.
+
+## Contribution
+Everyone in the group did their part for P+ and contributed equally. 
+Louise did 4 tests and the others got pull requests merged.
