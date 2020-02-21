@@ -41,19 +41,19 @@ import org.sirix.page.SerializationType;
  * @author Sebastian Graf, University of Konstanz.
  *
  */
-public final class FileStorage implements Storage {
+public class FileStorage implements Storage {
 
   /** Data file name. */
-  private static final String FILENAME = "sirix.data";
+  protected static final String FILENAME = "sirix.data";
 
   /** Revisions file name. */
-  private static final String REVISIONS_FILENAME = "sirix.revisions";
+  protected static final String REVISIONS_FILENAME = "sirix.revisions";
 
   /** Instance to storage. */
-  private final Path mFile;
+  protected final Path mFile;
 
   /** Byte handler pipeline. */
-  private final ByteHandlePipeline mByteHandler;
+  protected final ByteHandlePipeline mByteHandler;
 
   /**
    * Constructor.
@@ -81,7 +81,7 @@ public final class FileStorage implements Storage {
     }
   }
 
-  private Path createDirectoriesAndFile() throws IOException {
+  protected Path createDirectoriesAndFile() throws IOException {
     final Path concreteStorage = getDataFilePath();
 
     if (!Files.exists(concreteStorage)) {
@@ -125,7 +125,7 @@ public final class FileStorage implements Storage {
    *
    * @return the concrete storage for this database
    */
-  private Path getRevisionFilePath() {
+  protected Path getRevisionFilePath() {
     return mFile.resolve(ResourceConfiguration.ResourcePaths.DATA.getPath())
                 .resolve(REVISIONS_FILENAME);
   }

@@ -47,7 +47,7 @@ import org.sirix.page.interfaces.Page;
  * @author Sebastian Graf, University of Konstanz
  *
  */
-public final class FileWriter extends AbstractForwardingReader implements Writer {
+public class FileWriter extends AbstractForwardingReader implements Writer {
 
   /** Random access to work on. */
   private final RandomAccessFile mDataFile;

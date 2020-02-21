@@ -49,31 +49,31 @@ import com.google.common.hash.Hashing;
  * @author Johannes Lichtenberger
  *
  */
-public final class FileReader implements Reader {
+public class FileReader implements Reader {
 
   /** Beacon of first references. */
   final static int FIRST_BEACON = 12;
 
   /** Beacon of the other references. */
-  final static int OTHER_BEACON = 4;
+  protected final static int OTHER_BEACON = 4;
 
   /** Inflater to decompress. */
-  final ByteHandler mByteHandler;
+  protected final ByteHandler mByteHandler;
 
   /** The hash function used to hash pages/page fragments. */
   final HashFunction mHashFunction;
 
   /** Data file. */
-  private final RandomAccessFile mDataFile;
+  protected final RandomAccessFile mDataFile;
 
   /** Revisions offset file. */
-  private final RandomAccessFile mRevisionsOffsetFile;
+  protected final RandomAccessFile mRevisionsOffsetFile;
 
   /** The type of data to serialize. */
-  private final SerializationType mType;
+  protected final SerializationType mType;
 
   /** Used to serialize/deserialze pages. */
-  private final PagePersister mPagePersiter;
+  protected final PagePersister mPagePersiter;
 
   /**
    * Constructor.
