@@ -50,16 +50,16 @@ import org.sirix.page.interfaces.Page;
 public class FileWriter extends AbstractForwardingReader implements Writer {
 
   /** Random access to work on. */
-  private final RandomAccessFile mDataFile;
+  protected final RandomAccessFile mDataFile;
 
   /** {@link FileReader} reference for this writer. */
-  private final FileReader mReader;
+  protected final FileReader mReader;
 
-  private final SerializationType mType;
+  protected final SerializationType mType;
 
-  private final RandomAccessFile mRevisionsOffsetFile;
+  protected final RandomAccessFile mRevisionsOffsetFile;
 
-  private final PagePersister mPagePersister;
+  protected final PagePersister mPagePersister;
 
   /**
    * Constructor.
@@ -71,16 +71,16 @@ public class FileWriter extends AbstractForwardingReader implements Writer {
    * @param pagePersister transforms in-memory pages into byte-arrays and back
    */
   public FileWriter(final RandomAccessFile dataFile, final RandomAccessFile revisionsOffsetFile,
-      final ByteHandler handler, final SerializationType serializationType,
-      final PagePersister pagePersister) {
+                    final ByteHandler handler, final SerializationType serializationType,
+                    final PagePersister pagePersister) {
     mDataFile = checkNotNull(dataFile);
     mType = checkNotNull(serializationType);
     mRevisionsOffsetFile = mType == SerializationType.DATA
-        ? checkNotNull(revisionsOffsetFile)
-        : null;
+            ? checkNotNull(revisionsOffsetFile)
+            : null;
     mPagePersister = checkNotNull(pagePersister);
     mReader =
-        new FileReader(dataFile, revisionsOffsetFile, handler, serializationType, pagePersister);
+            new FileReader(dataFile, revisionsOffsetFile, handler, serializationType, pagePersister);
   }
 
   @Override
@@ -89,7 +89,7 @@ public class FileWriter extends AbstractForwardingReader implements Writer {
 
     while (uberPage.getRevisionNumber() != revision) {
       uberPage = (UberPage) mReader.read(
-          new PageReference().setKey(uberPage.getPreviousUberPageKey()), null);
+              new PageReference().setKey(uberPage.getPreviousUberPageKey()), null);
       if (uberPage.getRevisionNumber() == revision) {
         try {
           mDataFile.setLength(uberPage.getPreviousUberPageKey());
@@ -120,8 +120,8 @@ public class FileWriter extends AbstractForwardingReader implements Writer {
       final byte[] serializedPage;
 
       try (final ByteArrayOutputStream output = new ByteArrayOutputStream();
-          final DataOutputStream dataOutput =
-              new DataOutputStream(mReader.mByteHandler.serialize(output))) {
+           final DataOutputStream dataOutput =
+                   new DataOutputStream(mReader.mByteHandler.serialize(output))) {
         mPagePersister.serializePage(dataOutput, page, mType);
         dataOutput.flush();
         serializedPage = output.toByteArray();
@@ -137,8 +137,8 @@ public class FileWriter extends AbstractForwardingReader implements Writer {
       // Getting actual offset and appending to the end of the current file.
       final long fileSize = mDataFile.length();
       final long offset = fileSize == 0
-          ? FileReader.FIRST_BEACON
-          : fileSize;
+              ? FileReader.FIRST_BEACON
+              : fileSize;
       mDataFile.seek(offset);
       mDataFile.write(writtenPage);
 
@@ -167,6 +167,7 @@ public class FileWriter extends AbstractForwardingReader implements Writer {
       throw new SirixIOException(e);
     }
   }
+
 
   @Override
   public void close() throws SirixIOException {

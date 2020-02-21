@@ -1,23 +1,17 @@
-package org.sirix.io.memoryMapped;
+package org.sirix.io.file;
 
 import org.sirix.access.ResourceConfiguration;
 import org.sirix.exception.SirixIOException;
 import org.sirix.io.Reader;
 import org.sirix.io.Writer;
 import org.sirix.io.bytepipe.ByteHandlePipeline;
-import org.sirix.io.file.FileReader;
-import org.sirix.io.file.FileStorage;
-import org.sirix.io.file.FileWriter;
 import org.sirix.page.PagePersister;
 import org.sirix.page.SerializationType;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
 import java.nio.file.Path;
-import java.util.Random;
 
 public final class MemoryMap extends FileStorage {
 

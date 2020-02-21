@@ -24,7 +24,7 @@ import java.io.RandomAccessFile;
 import org.sirix.access.ResourceConfiguration;
 import org.sirix.exception.SirixIOException;
 import org.sirix.io.file.FileStorage;
-import org.sirix.io.memoryMapped.MemoryMap;
+import org.sirix.io.file.MemoryMap;
 import org.sirix.io.ram.RAMStorage;
 
 /**

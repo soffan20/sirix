@@ -1,4 +1,4 @@
-package org.sirix.io.memoryMapped;
+package org.sirix.io.file;
 
 import org.sirix.api.PageReadOnlyTrx;
 import org.sirix.exception.SirixIOException;
