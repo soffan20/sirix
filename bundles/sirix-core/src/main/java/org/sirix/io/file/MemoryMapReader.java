@@ -22,18 +22,12 @@ public class MemoryMapReader implements Reader {
 
     public MemoryMapReader(final RandomAccessFile dataFile, final RandomAccessFile revisionsOffsetFile,
                            final ByteHandler handler, final SerializationType serializationType,
-                           final PagePersister pagePersister) throws IOException {
+                           final PagePersister pagePersister, MappedByteBufferHandler dataBuffer,
+                           MappedByteBufferHandler revisionOffsetBuffer) throws IOException {
 
         fileReader = new FileReader(dataFile, revisionsOffsetFile, handler, serializationType, pagePersister);
-
-        FileChannel dataFileChannel = fileReader.mDataFile.getChannel();
-        MappedByteBuffer temp = dataFileChannel.map(FileChannel.MapMode.READ_WRITE, 0, dataFileChannel.size());
-        mDataBuffer = new MappedByteBufferHandler(temp, (int) dataFileChannel.size());
-
-        FileChannel revisionOffsetChannel = fileReader.mRevisionsOffsetFile.getChannel();
-        temp = revisionOffsetChannel.map(FileChannel.MapMode.READ_WRITE, 0, revisionOffsetChannel.size());
-        mRevisionOffsetBuffer = new MappedByteBufferHandler(temp, (int) revisionOffsetChannel.size());
-
+        this.mDataBuffer = dataBuffer;
+        this.mRevisionOffsetBuffer = revisionOffsetBuffer;
     }
 
     @Override

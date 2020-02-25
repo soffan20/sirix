@@ -28,19 +28,16 @@ public class MemoryMapWriter implements Writer {
 
     public MemoryMapWriter(final RandomAccessFile dataFile, final RandomAccessFile revisionsOffsetFile,
                            final ByteHandler handler, final SerializationType serializationType,
-                           final PagePersister pagePersister) throws IOException {
+                           final PagePersister pagePersister, MappedByteBufferHandler dataBuffer,
+                           MappedByteBufferHandler revisionOffsetBuffer) throws IOException {
 
         fileWriter = new FileWriter(dataFile, revisionsOffsetFile, handler, serializationType, pagePersister);
+        this.mDataBuffer = dataBuffer;
+        this.mRevisionOffsetBuffer = revisionOffsetBuffer;
 
-        FileChannel dataFileChannel = fileWriter.mDataFile.getChannel();
-        MappedByteBuffer temp = dataFileChannel.map(FileChannel.MapMode.READ_WRITE, 0, dataFileChannel.size());
-        mDataBuffer = new MappedByteBufferHandler(temp, (int) dataFileChannel.size());
 
-        FileChannel revisionOffsetChannel = fileWriter.mRevisionsOffsetFile.getChannel();
-        temp = revisionOffsetChannel.map(FileChannel.MapMode.READ_WRITE, 0, revisionOffsetChannel.size());
-        mRevisionOffsetBuffer = new MappedByteBufferHandler(temp, (int) revisionOffsetChannel.size());
 
-        reader = new MemoryMapReader(dataFile,revisionsOffsetFile,handler,serializationType,pagePersister);
+        reader = new MemoryMapReader(dataFile,revisionsOffsetFile,handler,serializationType,pagePersister, dataBuffer, revisionOffsetBuffer);
     }
 
     @Override
@@ -109,7 +106,7 @@ public class MemoryMapWriter implements Writer {
 
     @Override
     public Writer truncateTo(int revision) {
-        UberPage uberPage = (UberPage)
+        return null;
     }
 
     @Override
