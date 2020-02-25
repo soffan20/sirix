@@ -7,6 +7,7 @@ import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
+import org.openjdk.jmh.runner.options.TimeValue;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,9 +16,8 @@ import java.util.concurrent.TimeUnit;
 @Fork(value = 2, jvmArgs = {"-Xms2G", "-Xmx2G"})
 public class BenchmarkRunner {
   public static void main(String[] args) throws RunnerException {
-    final var opt = new OptionsBuilder()
-        .include(".*XMarkBench.*")
-        .forks(1)
+    var opt = new OptionsBuilder()
+        .include(StorageBench.class.getSimpleName())
         .build();
 
     new Runner(opt).run();

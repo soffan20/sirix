@@ -17,7 +17,7 @@ dependencies {
 
 // https://docs.gradle.org/current/dsl/org.gradle.api.tasks.JavaExec.html
 task jmh(type: JavaExec, dependsOn: jmhClasses) {
-    main = 'org.openjdk.jmh.Main'
+    main = 'io.sirix.benchmark.BenchmarkRunner'
     classpath = sourceSets.jmh.compileClasspath + sourceSets.jmh.runtimeClasspath
 
     // To enable the built-in stacktrace sampling profiler
