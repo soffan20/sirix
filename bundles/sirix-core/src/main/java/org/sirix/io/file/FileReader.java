@@ -49,7 +49,7 @@ import com.google.common.hash.Hashing;
  * @author Johannes Lichtenberger
  *
  */
-public class FileReader implements Reader {
+public final class FileReader implements Reader {
 
   /** Beacon of first references. */
   final static int FIRST_BEACON = 12;

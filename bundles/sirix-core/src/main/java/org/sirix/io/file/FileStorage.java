@@ -41,7 +41,7 @@ import org.sirix.page.SerializationType;
  * @author Sebastian Graf, University of Konstanz.
  *
  */
-public class FileStorage implements Storage {
+public final class FileStorage implements Storage {
 
   /** Data file name. */
   protected static final String FILENAME = "sirix.data";

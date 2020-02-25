@@ -3,8 +3,10 @@ package org.sirix.io.file;
 import org.sirix.access.ResourceConfiguration;
 import org.sirix.exception.SirixIOException;
 import org.sirix.io.Reader;
+import org.sirix.io.Storage;
 import org.sirix.io.Writer;
 import org.sirix.io.bytepipe.ByteHandlePipeline;
+import org.sirix.io.bytepipe.ByteHandler;
 import org.sirix.page.PagePersister;
 import org.sirix.page.SerializationType;
 
@@ -13,43 +15,27 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.file.Path;
 
-public final class MemoryMap extends FileStorage {
+/**
+ * This currenlty only supports up to 2 gb, due to limitation in buffer as they only support up to 2 gb.
+ */
+public final class MemoryMap implements Storage {
 
     RandomAccessFile randomAccessFile;
-
+    private FileStorage fileStorage = null;
     public MemoryMap(ResourceConfiguration resourceConfiguration) throws FileNotFoundException {
-        super(resourceConfiguration);
-        int length = 0x8FFFFFF;
-
-        randomAccessFile = new RandomAccessFile(this.FILENAME, "rw");
-        /**
-        try(RandomAccessFile file = new RandomAccessFile("howtodoinjava.dat", "rw"))
-        {
-            MappedByteBuffer out = file.getChannel()
-                    .map(FileChannel.MapMode.READ_WRITE, 0, length);
-
-            for (int i = 0; i < length; i++)
-            {
-                out.put((byte) 'x');
-            }
-
-            System.out.println("Finished writing");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-         */
-
+        fileStorage = new FileStorage(resourceConfiguration);
+        randomAccessFile = new RandomAccessFile(fileStorage.FILENAME, "rw");
     };
 
     @Override
     public Reader createReader() throws SirixIOException {
         try {
-            final Path dataFilePath = createDirectoriesAndFile();
-            final Path revisionsOffsetFilePath = getRevisionFilePath();
+            final Path dataFilePath = fileStorage.createDirectoriesAndFile();
+            final Path revisionsOffsetFilePath = fileStorage.getRevisionFilePath();
 
             return new MemoryMapReader(new RandomAccessFile(dataFilePath.toFile(), "r"),
                     new RandomAccessFile(revisionsOffsetFilePath.toFile(), "r"),
-                    new ByteHandlePipeline(mByteHandler), SerializationType.DATA, new PagePersister());
+                    new ByteHandlePipeline(fileStorage.mByteHandler), SerializationType.DATA, new PagePersister());
         } catch (final IOException e) {
             throw new SirixIOException(e);
         }
@@ -58,17 +44,29 @@ public final class MemoryMap extends FileStorage {
     @Override
     public Writer createWriter() throws SirixIOException {
         try {
-            final Path dataFilePath = createDirectoriesAndFile();
-            final Path revisionsOffsetFilePath = getRevisionFilePath();
+            final Path dataFilePath = fileStorage.createDirectoriesAndFile();
+            final Path revisionsOffsetFilePath = fileStorage.getRevisionFilePath();
 
             return new MemoryMapWriter(new RandomAccessFile(dataFilePath.toFile(), "rw"),
                     new RandomAccessFile(revisionsOffsetFilePath.toFile(), "rw"),
-                    new ByteHandlePipeline(mByteHandler), SerializationType.DATA, new PagePersister());
+                    new ByteHandlePipeline(fileStorage.mByteHandler), SerializationType.DATA, new PagePersister());
         } catch (final IOException e) {
             throw new SirixIOException(e);
         }
     }
 
     @Override
-    public void close(){};
+    public void close(){}
+
+    @Override
+    public boolean exists() throws SirixIOException {
+        return false;
+    }
+
+    @Override
+    public ByteHandler getByteHandler() {
+        return null;
+    }
+
+    ;
 }

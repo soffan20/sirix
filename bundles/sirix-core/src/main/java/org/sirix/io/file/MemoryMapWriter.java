@@ -1,16 +1,16 @@
 package org.sirix.io.file;
 
+import org.sirix.api.PageReadOnlyTrx;
 import org.sirix.exception.SirixIOException;
 import org.sirix.io.Writer;
 import org.sirix.io.bytepipe.ByteHandler;
 import org.sirix.io.file.FileReader;
 import org.sirix.io.file.FileWriter;
-import org.sirix.page.PagePersister;
-import org.sirix.page.PageReference;
-import org.sirix.page.RevisionRootPage;
-import org.sirix.page.SerializationType;
+import org.sirix.page.*;
 import org.sirix.page.interfaces.Page;
+import org.sirix.io.Writer;
 
+import javax.annotation.Nullable;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -19,15 +19,33 @@ import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 
-public class MemoryMapWriter extends FileWriter {
+public class MemoryMapWriter implements Writer {
+
+    private MappedByteBufferHandler mDataBuffer = null;
+    private MappedByteBufferHandler mRevisionOffsetBuffer = null;
+
+    private FileWriter fileWriter = null;
+    private int mDataSize = 0;
+
+    private int mRevisionOffsetSize = 0;
+
     public MemoryMapWriter(final RandomAccessFile dataFile, final RandomAccessFile revisionsOffsetFile,
                            final ByteHandler handler, final SerializationType serializationType,
-                           final PagePersister pagePersister){
-        super(dataFile, revisionsOffsetFile, handler, serializationType, pagePersister);
+                           final PagePersister pagePersister) throws IOException {
+
+        fileWriter = new FileWriter(dataFile, revisionsOffsetFile, handler, serializationType, pagePersister);
+
+        FileChannel dataFileChannel = fileWriter.mDataFile.getChannel();
+        MappedByteBuffer temp = dataFileChannel.map(FileChannel.MapMode.READ_WRITE, 0, dataFileChannel.size());
+        mDataBuffer = new MappedByteBufferHandler(temp, (int) dataFileChannel.size());
+
+        FileChannel revisionOffsetChannel = fileWriter.mRevisionsOffsetFile.getChannel();
+        temp = revisionOffsetChannel.map(FileChannel.MapMode.READ_WRITE, 0, revisionOffsetChannel.size());
+        mRevisionOffsetBuffer = new MappedByteBufferHandler(temp, (int) revisionOffsetChannel.size());
     }
 
     @Override
-    public Writer writeUberPageReference(PageReference pageReference) throws SirixIOException {
+    public Writer write(PageReference pageReference) throws SirixIOException {
         // Perform byte operations.
         try {
             // Serialize page.
@@ -38,8 +56,8 @@ public class MemoryMapWriter extends FileWriter {
 
             try (final ByteArrayOutputStream output = new ByteArrayOutputStream();
                  final DataOutputStream dataOutput =
-                         new DataOutputStream(mReader.mByteHandler.serialize(output))) {
-                mPagePersister.serializePage(dataOutput, page, mType);
+                         new DataOutputStream(fileWriter.mReader.mByteHandler.serialize(output))) {
+                fileWriter.mPagePersister.serializePage(dataOutput, page, fileWriter.mType);
                 dataOutput.flush();
                 serializedPage = output.toByteArray();
             }
@@ -52,17 +70,14 @@ public class MemoryMapWriter extends FileWriter {
             buffer.get(writtenPage, 0, writtenPage.length);
 
             // Getting actual offset and appending to the end of the current file.
-            final long fileSize = mDataFile.length();
+            final long fileSize = mDataBuffer.size();
             final long offset = fileSize == 0
                     ? FileReader.FIRST_BEACON
                     : fileSize;
 
-            FileChannel fileChannel = mDataFile.getChannel();
-            MappedByteBuffer mappedByteBuffer = fileChannel.map(FileChannel.MapMode.READ_WRITE, offset, fileChannel.size());
-            mappedByteBuffer.put(writtenPage);
-
+            mDataBuffer.write(writtenPage, (int) offset);
             // Remember page coordinates.
-            switch (mType) {
+            switch (fileWriter.mType) {
                 case DATA:
                     pageReference.setKey(offset);
                     break;
@@ -74,17 +89,52 @@ public class MemoryMapWriter extends FileWriter {
             }
 
             pageReference.setLength(writtenPage.length);
-            pageReference.setHash(mReader.mHashFunction.hashBytes(writtenPage).asBytes());
+            pageReference.setHash(fileWriter.mReader.mHashFunction.hashBytes(writtenPage).asBytes());
 
-            if (mType == SerializationType.DATA && page instanceof RevisionRootPage) {
-                FileChannel fileChannelRevisioned = mRevisionsOffsetFile.getChannel();
-                MappedByteBuffer mappedByteBufferRevisioned = fileChannelRevisioned.map(FileChannel.MapMode.READ_WRITE, mRevisionsOffsetFile.length(), writtenPage.length);
-                mappedByteBufferRevisioned.putLong(offset);
+            if (fileWriter.mType == SerializationType.DATA && page instanceof RevisionRootPage) {
+                mRevisionOffsetBuffer.putLong(offset);
             }
 
             return this;
         } catch (final IOException e) {
             throw new SirixIOException(e);
         }
+    }
+
+    @Override
+    public Writer writeUberPageReference(PageReference pageReference) throws SirixIOException {
+        write(pageReference);
+        mDataBuffer.writeLong(pageReference.getKey(), 0);
+        return this;
+    }
+
+    @Override
+    public Writer truncateTo(int revision) {
+        UberPage uberPage = (UberPage)
+    }
+
+    @Override
+    public Writer truncate() {
+        return null;
+    }
+
+    @Override
+    public PageReference readUberPageReference() throws SirixIOException {
+        return null;
+    }
+
+    @Override
+    public Page read(PageReference key, @Nullable PageReadOnlyTrx pageReadTrx) throws SirixIOException {
+        return null;
+    }
+
+    @Override
+    public void close() throws SirixIOException {
+
+    }
+
+    @Override
+    public RevisionRootPage readRevisionRootPage(int revision, PageReadOnlyTrx pageReadTrx) {
+        return null;
     }
 }
