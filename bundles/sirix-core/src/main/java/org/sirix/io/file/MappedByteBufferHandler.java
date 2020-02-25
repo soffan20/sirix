@@ -77,10 +77,6 @@ public class MappedByteBufferHandler {
         mappedByteBuffer.put(dataToBeWritten);
     }
 
-    public void force(){
-        this.mappedByteBuffer.force();
-    }
-
     public int size(){
         return size;
     }
@@ -117,5 +113,10 @@ public class MappedByteBufferHandler {
 
     public long readLong(){
         return readLong(offset);
+    }
+
+    public void force(){
+        mappedByteBuffer.limit(size);
+        mappedByteBuffer.force();
     }
 }
