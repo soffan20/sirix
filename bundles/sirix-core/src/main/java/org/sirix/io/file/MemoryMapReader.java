@@ -4,10 +4,7 @@ import org.sirix.api.PageReadOnlyTrx;
 import org.sirix.exception.SirixIOException;
 import org.sirix.io.bytepipe.ByteHandler;
 import org.sirix.io.Reader;
-import org.sirix.page.PagePersister;
-import org.sirix.page.PageReference;
-import org.sirix.page.RevisionRootPage;
-import org.sirix.page.SerializationType;
+import org.sirix.page.*;
 import org.sirix.page.interfaces.Page;
 
 import javax.annotation.Nonnull;
@@ -20,31 +17,34 @@ import java.nio.channels.FileChannel;
 public class MemoryMapReader implements Reader {
 
     private FileReader fileReader = null;
-    private MappedByteBuffer mDataBuffer = null;
-    private MappedByteBuffer mRevisionOffsetBuffer = null;
+    private MappedByteBufferHandler mDataBuffer = null;
+    private MappedByteBufferHandler mRevisionOffsetBuffer = null;
 
     public MemoryMapReader(final RandomAccessFile dataFile, final RandomAccessFile revisionsOffsetFile,
-                           final ByteHandler handler, final SerializationType type,
-                           final PagePersister pagePersistenter) throws IOException {
-        fileReader = new FileReader(dataFile, revisionsOffsetFile, handler, type, pagePersistenter);
-        FileChannel dataFileChannel = fileReader.mDataFile.getChannel();
-        mDataBuffer = dataFileChannel.map(FileChannel.MapMode.READ_ONLY, 0, dataFileChannel.size());
-        FileChannel revisionOffsetFileChannel = fileReader.mRevisionsOffsetFile.getChannel();
-        mRevisionOffsetBuffer =
-                revisionOffsetFileChannel.map(FileChannel.MapMode.READ_ONLY, 0, revisionOffsetFileChannel.size());
-    }
+                           final ByteHandler handler, final SerializationType serializationType,
+                           final PagePersister pagePersister) throws IOException {
 
-    private byte[] readNBytesFromMappedByteBuffer(MappedByteBuffer buffer, int nBytes){
-        byte[] dataLengthAsBytes = new byte[nBytes];
-        for(int i = 0; i < dataLengthAsBytes.length; i++){
-            dataLengthAsBytes[i] = buffer.get();
-        }
-        return dataLengthAsBytes;
+        fileReader = new FileReader(dataFile, revisionsOffsetFile, handler, serializationType, pagePersister);
+
+        FileChannel dataFileChannel = fileReader.mDataFile.getChannel();
+        MappedByteBuffer temp = dataFileChannel.map(FileChannel.MapMode.READ_WRITE, 0, dataFileChannel.size());
+        mDataBuffer = new MappedByteBufferHandler(temp, (int) dataFileChannel.size());
+
+        FileChannel revisionOffsetChannel = fileReader.mRevisionsOffsetFile.getChannel();
+        temp = revisionOffsetChannel.map(FileChannel.MapMode.READ_WRITE, 0, revisionOffsetChannel.size());
+        mRevisionOffsetBuffer = new MappedByteBufferHandler(temp, (int) revisionOffsetChannel.size());
+
     }
 
     @Override
     public PageReference readUberPageReference() throws SirixIOException {
-        return null;
+        final PageReference uberPageReference = new PageReference();
+        // Read primary beacon.
+        uberPageReference.setKey(mDataBuffer.readLong(0));
+
+        final UberPage page = (UberPage) read(uberPageReference, null);
+        uberPageReference.setPage(page);
+        return uberPageReference;
     }
 
     @Override
@@ -53,18 +53,17 @@ public class MemoryMapReader implements Reader {
             // Read page from file.
             switch (fileReader.mType) {
                 case DATA:
-                    mDataBuffer = mDataBuffer.position((int)reference.getKey());
+                    mDataBuffer.setOffset((int)reference.getKey());
                     break;
                 case TRANSACTION_INTENT_LOG:
-                    mDataBuffer = mDataBuffer.position((int) reference.getPersistentLogKey());
+                    mDataBuffer.setOffset((int) reference.getPersistentLogKey());
                     break;
                 default:
                     assert false; //Should not come here.
             }
-            final int dataLength = ByteBuffer.wrap(readNBytesFromMappedByteBuffer(mDataBuffer, 4)).getInt();
+            final int dataLength = mDataBuffer.readInt();
             reference.setLength(dataLength + FileReader.OTHER_BEACON);
             final byte[] page = new byte[dataLength];
-
 
             // Perform byte operations.
             final DataInputStream input =
@@ -87,12 +86,12 @@ public class MemoryMapReader implements Reader {
     @Override
     public RevisionRootPage readRevisionRootPage(int revision, PageReadOnlyTrx pageReadTrx) {
         try {
-            mRevisionOffsetBuffer.position(revision*8);
-            long positionToStartReadingFrom =
-                    ByteBuffer.wrap(readNBytesFromMappedByteBuffer(mRevisionOffsetBuffer, 8)).getLong();
-            mDataBuffer.position((int)positionToStartReadingFrom);
-            final int dataLength = ByteBuffer.wrap(readNBytesFromMappedByteBuffer(mDataBuffer, 4)).getInt();
-            final byte[] page = readNBytesFromMappedByteBuffer(mDataBuffer, dataLength);
+            mRevisionOffsetBuffer.setOffset(revision*8);
+            long positionToStartReadingFrom = mRevisionOffsetBuffer.readLong();
+
+            mDataBuffer.setOffset((int)positionToStartReadingFrom);
+            final int dataLength = mDataBuffer.readInt();
+            final byte[] page = mDataBuffer.read(dataLength);
 
             // Perform byte operations.
             final DataInputStream input =
