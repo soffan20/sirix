@@ -122,7 +122,9 @@ public class MemoryMapWriter implements Writer {
 
     @Override
     public Writer truncate() {
-        return null;
+        mDataBuffer.setSize(0);
+        mRevisionOffsetBuffer.setSize(0);
+        return this;
     }
 
 
