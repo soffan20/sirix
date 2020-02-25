@@ -11,16 +11,13 @@ import org.sirix.page.interfaces.Page;
 import org.sirix.io.Writer;
 
 import javax.annotation.Nullable;
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 
 public class MemoryMapWriter implements Writer {
-    private MemoryMapReader reader;
+    private MemoryMapReader mReader;
     private MappedByteBufferHandler mDataBuffer = null;
     private MappedByteBufferHandler mRevisionOffsetBuffer = null;
 
@@ -40,7 +37,7 @@ public class MemoryMapWriter implements Writer {
         temp = revisionOffsetChannel.map(FileChannel.MapMode.READ_WRITE, 0, revisionOffsetChannel.size());
         mRevisionOffsetBuffer = new MappedByteBufferHandler(temp, (int) revisionOffsetChannel.size());
 
-        reader = new MemoryMapReader(dataFile,revisionsOffsetFile,handler,serializationType,pagePersister);
+        mReader = new MemoryMapReader(dataFile,revisionsOffsetFile,handler,serializationType,pagePersister);
     }
 
     @Override
@@ -109,7 +106,21 @@ public class MemoryMapWriter implements Writer {
 
     @Override
     public Writer truncateTo(int revision) {
-        UberPage uberPage = (UberPage)
+
+        UberPage uberPage = (UberPage) mReader.readUberPageReference().getPage();
+
+        while (uberPage.getRevisionNumber() != revision) {
+            uberPage = (UberPage) mReader.read(
+                    new PageReference().setKey(uberPage.getPreviousUberPageKey()), null);
+            if (uberPage.getRevisionNumber() == revision) {
+
+                mDataBuffer.setSize((int) uberPage.getPreviousUberPageKey());
+
+                break;
+            }
+        }
+
+        return this;
     }
 
     @Override
@@ -120,12 +131,12 @@ public class MemoryMapWriter implements Writer {
 
     @Override
     public PageReference readUberPageReference() throws SirixIOException {
-        return reader.readUberPageReference();
+        return mReader.readUberPageReference();
     }
 
     @Override
     public Page read(PageReference key, @Nullable PageReadOnlyTrx pageReadTrx) throws SirixIOException {
-        return reader.read(key, pageReadTrx);
+        return mReader.read(key, pageReadTrx);
     }
 
     @Override
