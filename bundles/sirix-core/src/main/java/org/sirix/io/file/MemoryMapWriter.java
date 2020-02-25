@@ -25,9 +25,6 @@ public class MemoryMapWriter implements Writer {
     private MappedByteBufferHandler mRevisionOffsetBuffer = null;
 
     private FileWriter fileWriter = null;
-    private int mDataSize = 0;
-
-    private int mRevisionOffsetSize = 0;
 
     public MemoryMapWriter(final RandomAccessFile dataFile, final RandomAccessFile revisionsOffsetFile,
                            final ByteHandler handler, final SerializationType serializationType,
@@ -92,7 +89,7 @@ public class MemoryMapWriter implements Writer {
             pageReference.setHash(fileWriter.mReader.mHashFunction.hashBytes(writtenPage).asBytes());
 
             if (fileWriter.mType == SerializationType.DATA && page instanceof RevisionRootPage) {
-                mRevisionOffsetBuffer.putLong(offset);
+                mRevisionOffsetBuffer.writeLong(offset);
             }
 
             return this;

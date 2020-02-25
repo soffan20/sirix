@@ -44,10 +44,7 @@ public class MemoryMapReader implements Reader {
 
     @Override
     public PageReference readUberPageReference() throws SirixIOException {
-        final PageReference uberPageReference = new PageReference();
-        try{
-            
-        }
+        return null;
     }
 
     @Override

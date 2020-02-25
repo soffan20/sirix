@@ -114,4 +114,9 @@ public class MappedByteBufferHandler {
     public long readLong(){
         return readLong(offset);
     }
+
+    public void force(){
+        mappedByteBuffer.limit(size);
+        mappedByteBuffer.force();
+    }
 }
