@@ -48,6 +48,13 @@ public enum StorageType {
     public Storage getInstance(final ResourceConfiguration resourceConf) {
       return new FileStorage(resourceConf);
     }
+  },
+
+  MEMORY_MAPPED_FILE {
+    @Override
+    public Storage getInstance(final ResourceConfiguration resourceConf) {
+      return null;
+    }
   };
 
   /**
@@ -55,7 +62,7 @@ public enum StorageType {
    *
    * @param resourceConf {@link ResourceConfiguration} reference
    * @return instance of a storage backend specified within the {@link ResourceConfiguration}
-   * @throws SirixIOException if an IO-error occured
+   * @throws SirixIOException if an IO-error occurred
    */
   public abstract Storage getInstance(final ResourceConfiguration resourceConf);
 
