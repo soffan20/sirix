@@ -131,4 +131,8 @@ public class MappedByteBufferHandler {
     public int readInt(int offset){
         return ByteBuffer.wrap(read(4,offset)).getInt();
     }
+
+    public void setSize(int size){
+        this.size = size;
+    }
 }
