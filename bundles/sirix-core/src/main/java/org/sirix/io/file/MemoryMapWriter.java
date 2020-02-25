@@ -20,7 +20,7 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 
 public class MemoryMapWriter implements Writer {
-
+    private MemoryMapReader reader;
     private MappedByteBufferHandler mDataBuffer = null;
     private MappedByteBufferHandler mRevisionOffsetBuffer = null;
 
@@ -42,6 +42,8 @@ public class MemoryMapWriter implements Writer {
         FileChannel revisionOffsetChannel = fileWriter.mRevisionsOffsetFile.getChannel();
         temp = revisionOffsetChannel.map(FileChannel.MapMode.READ_WRITE, 0, revisionOffsetChannel.size());
         mRevisionOffsetBuffer = new MappedByteBufferHandler(temp, (int) revisionOffsetChannel.size());
+
+        reader = new MemoryMapReader(dataFile,revisionsOffsetFile,handler,serializationType,pagePersister);
     }
 
     @Override
@@ -118,23 +120,26 @@ public class MemoryMapWriter implements Writer {
         return null;
     }
 
+
     @Override
     public PageReference readUberPageReference() throws SirixIOException {
-        return null;
+        return reader.readUberPageReference();
     }
 
     @Override
     public Page read(PageReference key, @Nullable PageReadOnlyTrx pageReadTrx) throws SirixIOException {
-        return null;
+        return reader.read(key, pageReadTrx);
     }
 
     @Override
     public void close() throws SirixIOException {
-
+        mDataBuffer.force();
+        mRevisionOffsetBuffer.force();
     }
 
     @Override
     public RevisionRootPage readRevisionRootPage(int revision, PageReadOnlyTrx pageReadTrx) {
         return null;
     }
+
 }

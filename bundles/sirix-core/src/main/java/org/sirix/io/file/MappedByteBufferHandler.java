@@ -77,6 +77,10 @@ public class MappedByteBufferHandler {
         mappedByteBuffer.put(dataToBeWritten);
     }
 
+    public void force(){
+        this.mappedByteBuffer.force();
+    }
+
     public int size(){
         return size;
     }
