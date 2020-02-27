@@ -53,7 +53,7 @@ refactoring).
 
 ### Patch/fix
 
-[Patchj](https://github.com/soffan20/sirix/pull/73)
+[Patch](https://github.com/soffan20/sirix/pull/73)
 
 Optional (point 4): the patch is clean.
 
