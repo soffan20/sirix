@@ -15,9 +15,9 @@ the tests. Building and running the project and tests were not documented and to
 
 ## UML class diagram and its description
 
-![UML diagram before changes](https://drive.google.com/open?id=1aRD_uANkDXxkefOC7EtGK1fH02ZmWJDf)
+[UML diagram before changes](https://drive.google.com/open?id=1aRD_uANkDXxkefOC7EtGK1fH02ZmWJDf)
 
-![UML diagram after changes](https://drive.google.com/open?id=1gbGhfqkQB65t8VKQCfqqriHqFJ0KPteQ)
+[UML diagram after changes](https://drive.google.com/open?id=1gbGhfqkQB65t8VKQCfqqriHqFJ0KPteQ)
 
 Optional (point 1): Architectural overview.
 
