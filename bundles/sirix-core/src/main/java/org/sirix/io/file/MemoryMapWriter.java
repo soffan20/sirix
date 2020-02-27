@@ -146,7 +146,6 @@ public class MemoryMapWriter implements Writer {
 
     @Override
     public RevisionRootPage readRevisionRootPage(int revision, PageReadOnlyTrx pageReadTrx) {
-        return null;
+        return mReader.readRevisionRootPage(revision, pageReadTrx);
     }
-
 }

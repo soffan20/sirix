@@ -116,7 +116,7 @@ public final class FileStorage implements Storage {
    *
    * @return the path for this data file
    */
-  private Path getDataFilePath() {
+  public Path getDataFilePath() {
     return mFile.resolve(ResourceConfiguration.ResourcePaths.DATA.getPath()).resolve(FILENAME);
   }
 

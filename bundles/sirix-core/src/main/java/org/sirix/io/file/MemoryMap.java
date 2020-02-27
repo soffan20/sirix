@@ -10,11 +10,13 @@ import org.sirix.io.bytepipe.ByteHandler;
 import org.sirix.page.PagePersister;
 import org.sirix.page.SerializationType;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
@@ -31,16 +33,18 @@ public final class MemoryMap implements Storage {
     public MemoryMap(ResourceConfiguration resourceConfiguration) throws SirixIOException {
         fileStorage = new FileStorage(resourceConfiguration);
         try{
-        dataFile = new RandomAccessFile(FileStorage.FILENAME, "rw");
+        dataFile = new RandomAccessFile(fileStorage.createDirectoriesAndFile().toFile(), "rw");
+            System.out.println(dataFile.length());
         revisionOffsetFile = new RandomAccessFile(FileStorage.REVISIONS_FILENAME, "rw");
 
         FileChannel dataFileChannel = dataFile.getChannel();
-        MappedByteBuffer temp = dataFileChannel.map(FileChannel.MapMode.READ_WRITE, 0, dataFileChannel.size());
+        MappedByteBuffer temp = dataFileChannel.map(FileChannel.MapMode.READ_WRITE, 0, dataFile.length());
         mDataHandler = new MappedByteBufferHandler(temp, (int) dataFileChannel.size());
 
         FileChannel revisionOffsetChannel = revisionOffsetFile.getChannel();
-        temp = revisionOffsetChannel.map(FileChannel.MapMode.READ_WRITE, 0, revisionOffsetChannel.size());
-        mRevisionOffsetHandler = new MappedByteBufferHandler(temp, (int) revisionOffsetChannel.size());}
+        temp = revisionOffsetChannel.map(FileChannel.MapMode.READ_WRITE, 0, revisionOffsetFile.length());
+        mRevisionOffsetHandler = new MappedByteBufferHandler(temp, (int) revisionOffsetChannel.size());
+        }
         catch(final IOException e){
             throw new SirixIOException(e);
         }
@@ -82,13 +86,16 @@ public final class MemoryMap implements Storage {
 
     @Override
     public boolean exists() throws SirixIOException {
-        return false;
+        final Path storage = fileStorage.getDataFilePath();
+        try {
+            return Files.exists(storage) && Files.size(storage) > 0;
+        } catch (final IOException e) {
+            throw new SirixIOException(e);
+        }
     }
 
     @Override
     public ByteHandler getByteHandler() {
-        return null;
+        return fileStorage.mByteHandler;
     }
-
-    ;
 }
