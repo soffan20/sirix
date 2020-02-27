@@ -64,68 +64,68 @@ Optional (point 5): considered for acceptance (passes all automated checks).
 For each team member, how much time was spent in
 
 1. plenary discussions/meetings;
-*Andreas: 4
-*Daniel: 4
-*Emil: 4
-*Louise: 4
-*Mikael: 4
+* Andreas: 4
+* Daniel: 4
+* Emil: 4
+* Louise: 4
+* Mikael: 4
 
 
 2. discussions within parts of the group;
 
-*Andreas: 3
-*Daniel: 3
-*Emil: 3
-*Louise:
-*Mikael: 3
+* Andreas: 3
+* Daniel: 3
+* Emil: 3
+* Louise:
+* Mikael: 3
 
 3. reading documentation;
 
-*Andreas:
-*Daniel:
-*Emil: 5
-*Louise: 10
-*Mikael:
+* Andreas:
+* Daniel:
+* Emil: 5
+* Louise: 10
+* Mikael:
 
 4. configuration and setup;
 
-*Andreas: 1
-*Daniel: 1
-*Emil: 4
-*Louise: 1
-*Mikael: 1
+* Andreas: 1
+* Daniel: 1
+* Emil: 4
+* Louise: 1
+* Mikael: 1
 
 5. analyzing code/output;
 
-*Andreas: 2
-*Daniel: 2
-*Emil: 1
-*Louise:
-*Mikael: 2
+* Andreas: 2
+* Daniel: 2
+* Emil: 1
+* Louise:
+* Mikael: 2
 
 6. writing documentation;
 
-*Andreas:
-*Daniel:
-*Emil: 5
-*Louise: 8
-*Mikael:
+* Andreas:
+* Daniel:
+* Emil: 5
+* Louise: 8
+* Mikael:
 
 7. writing code;
 
-*Andreas: 18
-*Daniel: 18
-*Emil: 5
-*Louise: 2
-*Mikael: 18
+* Andreas: 18
+* Daniel: 18
+* Emil: 5
+* Louise: 2
+* Mikael: 18
 
 8. running code?
 
-*Andreas: 2
-*Daniel: 2
-*Emil: 4
-*Louise:
-*Mikael: 2
+* Andreas: 2
+* Daniel: 2
+* Emil: 4
+* Louise:
+* Mikael: 2
 
 When setting up the tools and settings we had some issues making the project to build, so this took some extra time. 
 
