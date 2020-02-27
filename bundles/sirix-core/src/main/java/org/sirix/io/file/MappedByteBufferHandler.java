@@ -67,6 +67,8 @@ public class MappedByteBufferHandler {
         if(offset < 0 || dataToBeWritten == null)
             throw new IllegalArgumentException("Offset must be not be negative and dataToBeWritten most not be null.");
 
+        mappedByteBuffer.put(dataToBeWritten);
+
         //Updates size.
         size = Math.max(dataToBeWritten.length + offset, size);
 
@@ -74,7 +76,6 @@ public class MappedByteBufferHandler {
         offset = offset + dataToBeWritten.length;
         mappedByteBuffer.position(offset);
 
-        mappedByteBuffer.put(dataToBeWritten);
     }
 
     public int size(){

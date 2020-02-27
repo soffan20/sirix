@@ -22,28 +22,28 @@ import java.nio.file.Path;
  */
 public final class MemoryMap implements Storage {
 
-    RandomAccessFile randomAccessFile;
+    RandomAccessFile dataFile = null;
+    RandomAccessFile revisionOffsetFile = null;
     private FileStorage fileStorage = null;
     private MappedByteBufferHandler mDataHandler = null;
     private MappedByteBufferHandler mRevisionOffsetHandler = null;
 
-    public MemoryMap(ResourceConfiguration resourceConfiguration) throws IOException {
+    public MemoryMap(ResourceConfiguration resourceConfiguration) throws SirixIOException {
         fileStorage = new FileStorage(resourceConfiguration);
-        randomAccessFile = new RandomAccessFile(fileStorage.FILENAME, "rw");
+        try{
+        dataFile = new RandomAccessFile(FileStorage.FILENAME, "rw");
+        revisionOffsetFile = new RandomAccessFile(FileStorage.REVISIONS_FILENAME, "rw");
 
-        final Path dataFilePath = fileStorage.createDirectoriesAndFile();
-        final Path revisionsOffsetFilePath = fileStorage.getRevisionFilePath();
-        FileWriter fileWriter =  new FileWriter(new RandomAccessFile(dataFilePath.toFile(), "r"),
-                new RandomAccessFile(revisionsOffsetFilePath.toFile(), "r"),
-                new ByteHandlePipeline(fileStorage.mByteHandler), SerializationType.DATA, new PagePersister());
-
-        FileChannel dataFileChannel = fileWriter.mDataFile.getChannel();
+        FileChannel dataFileChannel = dataFile.getChannel();
         MappedByteBuffer temp = dataFileChannel.map(FileChannel.MapMode.READ_WRITE, 0, dataFileChannel.size());
         mDataHandler = new MappedByteBufferHandler(temp, (int) dataFileChannel.size());
 
-        FileChannel revisionOffsetChannel = fileWriter.mRevisionsOffsetFile.getChannel();
+        FileChannel revisionOffsetChannel = revisionOffsetFile.getChannel();
         temp = revisionOffsetChannel.map(FileChannel.MapMode.READ_WRITE, 0, revisionOffsetChannel.size());
-        mRevisionOffsetHandler = new MappedByteBufferHandler(temp, (int) revisionOffsetChannel.size());
+        mRevisionOffsetHandler = new MappedByteBufferHandler(temp, (int) revisionOffsetChannel.size());}
+        catch(final IOException e){
+            throw new SirixIOException(e);
+        }
     };
 
     @Override
