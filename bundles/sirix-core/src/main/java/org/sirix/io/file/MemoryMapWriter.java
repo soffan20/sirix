@@ -20,18 +20,19 @@ public class MemoryMapWriter implements Writer {
     private MemoryMapReader mReader;
     private MappedByteBufferHandler mDataBuffer = null;
     private MappedByteBufferHandler mRevisionOffsetBuffer = null;
+    private MemoryMap parent;
 
     private FileWriter fileWriter = null;
 
     public MemoryMapWriter(final RandomAccessFile dataFile, final RandomAccessFile revisionsOffsetFile,
                            final ByteHandler handler, final SerializationType serializationType,
                            final PagePersister pagePersister, MappedByteBufferHandler dataBuffer,
-                           MappedByteBufferHandler revisionOffsetBuffer) throws IOException {
+                           MappedByteBufferHandler revisionOffsetBuffer, MemoryMap parent) throws IOException {
 
         fileWriter = new FileWriter(dataFile, revisionsOffsetFile, handler, serializationType, pagePersister);
         this.mDataBuffer = dataBuffer;
         this.mRevisionOffsetBuffer = revisionOffsetBuffer;
-
+        this.parent = parent;
 
 
         mReader = new MemoryMapReader(dataFile,revisionsOffsetFile,handler,serializationType,pagePersister, dataBuffer, revisionOffsetBuffer);
@@ -39,6 +40,7 @@ public class MemoryMapWriter implements Writer {
 
     @Override
     public Writer write(PageReference pageReference) throws SirixIOException {
+
         // Perform byte operations.
         try {
             // Serialize page.
@@ -68,6 +70,8 @@ public class MemoryMapWriter implements Writer {
                     ? FileReader.FIRST_BEACON
                     : fileSize;
 
+            if(mDataBuffer.limit() < offset + writtenPage.length)
+                parent.updateSize(mDataBuffer, offset + writtenPage.length);
             mDataBuffer.write(writtenPage, (int) offset);
             // Remember page coordinates.
             switch (fileWriter.mType) {
@@ -85,6 +89,8 @@ public class MemoryMapWriter implements Writer {
             pageReference.setHash(fileWriter.mReader.mHashFunction.hashBytes(writtenPage).asBytes());
 
             if (fileWriter.mType == SerializationType.DATA && page instanceof RevisionRootPage) {
+                if(mRevisionOffsetBuffer.limit() < 8 + offset)
+                    parent.updateSize(mRevisionOffsetBuffer, 8 + offset);
                 mRevisionOffsetBuffer.writeLong(offset);
             }
 

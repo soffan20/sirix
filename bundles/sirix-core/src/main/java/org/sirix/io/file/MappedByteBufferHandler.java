@@ -20,6 +20,16 @@ public class MappedByteBufferHandler {
         this.offset = offset;
     }
 
+    public void updateLimit(MappedByteBuffer mappedByteBuffer){
+        this.force();
+        this.mappedByteBuffer = mappedByteBuffer;
+    }
+
+    //Returns the limit of the underlying buffer.
+    public int limit(){
+        return mappedByteBuffer.limit();
+    }
+
     public MappedByteBufferHandler(MappedByteBuffer mappedByteBuffer, int size){
         this(mappedByteBuffer, size, 0);
     }
