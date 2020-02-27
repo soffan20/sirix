@@ -1,4 +1,4 @@
-##Overview SirixDB
+## Overview SirixDB
 SirixDB is a versioned database focused on storing temporal data in XML or JSON form. The purpose is to have a way of checking past information in your system and to be able to see when the information was added, deleted, and changed. The thought is for SirixDB to store small size snapshots (commits) to save both space and performance, thus competing in efficiency with non-temporal database systems. 
 
 Compared to a temporal database, which is storing data related to time instances, how long the value was true in the real world, at what time the value was stored in the database and how long it was valid in the database, SirixDB is storing the changes in a snapshot. This makes it more space and performance efficient.
