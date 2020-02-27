@@ -63,12 +63,33 @@ scenarios.
 
 ### Patch/fix
 
-Here is our path of our implementation: [Patch](https://github.com/soffan20/sirix/pull/73)
+Here is our path of our implementation: [Patch](https://github.com/soffan20/sirix/pull/74)
 
 Optional (point 4): the patch is clean.
 
 The bugfixes and the extending the test suite with tests covering cases where
 we found bugs were sent upstream in a pull request: [Patch](https://github.com/sirixdb/sirix/pull/220)
+
+### Documentation MemoryMap Implementation 
+The current implementation will do all read/writes directly to disc when managing the database. The main idea with this implementation is to use MappedByteBuffer which will load a file into memory that can be accessed faster.
+
+
+MemoryMap
+
+MemoryMap is the equivalent of FileStorage with methods createReader and createWriter. The MemoryMap works as a virtual file which is instead stored in the RAM> These methods return a MemoryMapReader and MemoryMapWriter respectively, instead of the FileReader and FileWriter that FileStorage returns. MemoryMap uses composition with FileStorage in order to use the functions that don’t need to be modified.
+
+MemoryMapWriter
+
+MemoryMapWriter is the equivalent of FileWriter. It has the same functionality as FileWriter except for writing to RAM instead of a file on the harddrive. A MappedByteBuffer is used to read and write from RAM instead of using the seek, get and put methods of RandomAccessFile. 
+
+MemoryMapReader
+
+MemoryMapReader is the equivalent of FilerReader. It has the same functionality as FileReader except for reading from RAM instead of a file on the harddrive. A MappedByteBuffer is used to read from RAM instead of using the seek and get methods of RandomAccessFile. 
+
+MappedByteBufferHandler 
+
+MappedByteBufferHandler is used to handle the writing and reading to and from files to make sure that the offset and size of the buffer are correctly handled. It implements all the necessary methods that are needed for reading and writing. It also makes sure that the the file which is held in memory is synchronized so that several threads accessing the file will see the same thing.
+
 
 ## Effort spent
 
@@ -151,3 +172,11 @@ The issues seemed doable from the start, but since there were many existing bugs
 Since this issue at hand is at its core related to performance, we decided to implement a benchmark suite to properly verify the performance benefits (or losses) of the different storage backends. The benchmark suite is written generically for the Storage interface and then run for each implementor. The results are then aggregated and displayed in a table format at the end of benchmarking all backends.
 
 [Benchmark](https://github.com/soffan20/sirix/commit/6d32d6e16eda51985b3c8e78996cd28205e35baa)
+
+### Contributions 
+
+Louise: Documentation and tests.
+
+Daniel, Andreas and Mikael: Memory Mapped Storage
+
+Emil: Tests, benchmarks, and bug fixing	
