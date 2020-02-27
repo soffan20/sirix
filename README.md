@@ -44,20 +44,31 @@ Optional (point 3): trace tests to requirements.
 
 ### Existing test cases relating to refactored code
 
-### Test results
-
 Our new feature only adds code and does not change the existing code, but it is hidden behind an interface that is tested throughout the test code.
+The interfaces themselves (Reader, Writer, Storage) are not directly tested in the
+code but instead indirectly in the integration tests. The integration tests
+are not extensive but only tests the most basic Database operartions;
+inserting, updating, reading, and deleting.
 
-Overall results with a link to a copy or excerpt of the logs (before/after
-refactoring).
+[Some of the integration tests can be found
+here](https://github.com/sirixdb/sirix/tree/master/bundles/sirix-xquery/src/test/java/org/sirix/xquery/function/jn/io)
+
+
+### Test results
+The existing coverage for the already existing related code is ~80%. The
+existing tests does not directly test the storage interface but instead tested
+everywhere else indirectly. Since the interface was not tested for anything
+other than the basic usage, we quikcly found a few bugs that appeared in special case
+scenarios.
 
 ### Patch/fix
 
-[Patch](https://github.com/soffan20/sirix/pull/73)
+Here is our path of our implementation: [Patch](https://github.com/soffan20/sirix/pull/73)
 
 Optional (point 4): the patch is clean.
 
-Optional (point 5): considered for acceptance (passes all automated checks).
+The bugfixes and the extending the test suite with tests covering cases where
+we found bugs were sent upstream in a pull request: [Patch](https://github.com/sirixdb/sirix/pull/220)
 
 ## Effort spent
 
