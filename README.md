@@ -32,9 +32,11 @@ The maintainer described the issue like this:
 > In addition to the RandomAccessFile backend, we could use a memory-mapped file backend, preferably using a framework or something like that which is proven and stable.
 
 In short, the current storage backend system uses direct files as the underlying backing storage, which are inherently slow when subjected to lots of small writes and read due to excessive copying inside the OS. By switching to memory-mapped files, we can reduce the time spent writing changes to disk. Memory-mapped files allow the OS to decide for itself when it want to flush the changes to disk. Allowing the OS to do batch disk operations instead we can gain a significant performance boost. All existing major relational database systems use memory-mapped files.
-[Functional requirements](https://docs.google.com/spreadsheets/d/18Y5qv2kYvP9o51C7uxbBEtsGyPz5dqG4tnvo5QNrNkQ/edit?usp=sharing)
+
 
 ### Requirements affected by functionality being refactored
+
+[Functional requirements](https://docs.google.com/spreadsheets/d/18Y5qv2kYvP9o51C7uxbBEtsGyPz5dqG4tnvo5QNrNkQ/edit?usp=sharing)
 
 P+ criteria 3.2.1.3: [Trace tests to requirements](https://github.com/soffan20/sirix/commit/acab3ea6d6f9697920d6d2831ba65b99dbe36e44)
 
