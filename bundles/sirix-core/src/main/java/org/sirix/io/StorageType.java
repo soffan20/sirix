@@ -24,6 +24,7 @@ import java.io.RandomAccessFile;
 import org.sirix.access.ResourceConfiguration;
 import org.sirix.exception.SirixIOException;
 import org.sirix.io.file.FileStorage;
+import org.sirix.io.file.MemoryMap;
 import org.sirix.io.ram.RAMStorage;
 
 /**
@@ -53,9 +54,11 @@ public enum StorageType {
   MEMORY_MAPPED_FILE {
     @Override
     public Storage getInstance(final ResourceConfiguration resourceConf) {
-      return null;
+      return new MemoryMap(resourceConf);
     }
   };
+
+
 
   /**
    * Get an instance of the storage backend.

@@ -137,7 +137,7 @@ public final class ResourceConfiguration {
 
   // FIXED STANDARD FIELDS
   /** Standard storage. */
-  private static final StorageType STORAGE = StorageType.FILE;
+  private static final StorageType STORAGE = StorageType.MEMORY_MAP;
 
   /** Standard versioning approach. */
   private static final VersioningType VERSIONING = VersioningType.SLIDING_SNAPSHOT;
