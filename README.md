@@ -12,7 +12,7 @@ Did it build and run as documented?
     
 Yes, but it was a bit hard to know how to run the tests. Windows had some issues running
 the tests. Building and running the project and tests were not documented and took a while to figure out
-
+[WIP] Start work on a memory mapped file storage backend
 ## UML class diagram and its description
 
 [UML diagram before changes](https://drive.google.com/open?id=1aRD_uANkDXxkefOC7EtGK1fH02ZmWJDf)
@@ -36,7 +36,7 @@ In short, the current storage backend system uses direct files as the underlying
 
 ### Requirements affected by functionality being refactored
 
-P+ criteria 3.2.1.3: [Trace tests to requirements]https://github.com/soffan20/sirix/commit/acab3ea6d6f9697920d6d2831ba65b99dbe36e44)
+P+ criteria 3.2.1.3: [Trace tests to requirements](https://github.com/soffan20/sirix/commit/acab3ea6d6f9697920d6d2831ba65b99dbe36e44)
 
 ### Existing test cases relating to refactored code
 
